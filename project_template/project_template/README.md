@@ -1,5 +1,12 @@
 # [PROGRAM NAME] 
-[a description of the program]
+
+Adventure Game with three challenges
+
+Challenges idea:
+  - two doors with three challenges in between
+  - rhythmn game
+  - choose the right treasure
+  - enemies 
 
 ## Getting Started
 ---
@@ -26,4 +33,6 @@ root                    (project root folder)
 
 ## Authors
 ---
-[list author names and emails]
+Kendrick Mausisa
+Mike Downs
+Joseph Black
