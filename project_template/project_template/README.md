@@ -29,7 +29,7 @@ root                    (project root folder)
 
 ## Required Technologies
 ---
-[list required libraries]
+Arcade
 
 ## Authors
 ---
