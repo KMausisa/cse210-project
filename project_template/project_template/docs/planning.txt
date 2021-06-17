@@ -1,0 +1,77 @@
+The Jungle Quest Wish List
+
+
+Main Scene
+•	Play button
+
+
+
+Game Scene
+•	Playable Character
+•	Wandering enemies 
+•	Opening/closing doors
+•	Challenges
+•	Prize
+
+
+
+Win Scene
+•	Announcement
+•	Restart button
+
+
+
+Lose Scene
+•	Announcement
+•	Restart button
+
+
+
+
+Feature List
+•	If I shared this with a friend, which features must work?:
+Assuming the game runs, we would want the playable character to respond to the user’s commands.  We would also want the enemies to randomly wander around, the doors to open, and to have a prize at the end.
+
+
+•	Which features am I the most excited about building?
+We are excited about the feature when the user can press the button to open the door.  We are also excited about the feature of dodging the bad guys by jumping or running away.  The possibility of building additional challenges to enhance the game.
+
+
+•	Which features are the most unique to my program?
+The most unique feature would be the opening and closing doors of the level.  
+
+
+•	Which features will I learn the most from implementing?
+The features that we would be learning the most from is when we try to add additional challenges.  Some of the challenges we thought of were making floating platforms the user has to jump onto or matching a small number of musical notes with the key board.
+
+
+•	Do some features seem too far beyond my skill level?
+One feature that might be beyond our skill level is programming the music challenge of having the computer play some notes and the user matching them.  Another challenging feature would be making the playable character look like it is walking.  
+
+
+ (1) means top priority, (2) means middle priority, and (3) means lowest priority.
+
+
+(2) Main Scene
+•	(2) Play button
+
+
+
+(1) Game Scene
+•	(1)Playable Character
+•	(1)Wandering enemies 
+•	(1)Opening/closing doors
+•	(2)Music Note Challenge
+•	(2)Floating Brick Challenge
+•	(1)Choosing the right Prize
+
+
+(2) Win Scene
+•	(2)Announcement
+•	(3)Restart Button
+
+
+(2) Lose Scene
+•	(2)Announcement
+•	(3)Restart Button
+
