@@ -31,7 +31,10 @@ Lose Scene
 Feature List
 •	If I shared this with a friend, which features must work?:
 Assuming the game runs, we would want the playable character to respond to the user’s commands.  We would also want the enemies to randomly wander around, the doors to open, and to have a prize at the end.
-
+(1) Playable Character
+(1) Wandering enemies
+(1) Interactive door
+(1) Prize at End
 
 •	Which features am I the most excited about building?
 We are excited about the feature when the user can press the button to open the door.  We are also excited about the feature of dodging the bad guys by jumping or running away.  The possibility of building additional challenges to enhance the game.
