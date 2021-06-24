@@ -1,7 +1,6 @@
 import arcade
 from game import constants
 
-
 class Jungle(arcade.Window):
     "Main Application Class"
 
@@ -12,13 +11,21 @@ class Jungle(arcade.Window):
 
         self.player_list = None
         self.wall_list = None
+        self.player_sprite = None
 
-        arcade.set_background_color(arcade.csscolor.GOLD)
+        #Our Physics Engine
+        self.physics_engine = None
+
+        arcade.set_background_color(arcade.csscolor.BLACK)
 
     def setup(self):
+        """Sets up the charcter,walls, and primitive sound. """
 
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+
+        #Sounds
+        self.jumping_noise = arcade.load_sound(":resources:sounds/jump2.wav")
 
         image = ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png"
         self.player_sprite = arcade.Sprite(image, constants.CHARACTER_SCALING)
@@ -36,13 +43,12 @@ class Jungle(arcade.Window):
             wall.center_y = 32
             self.wall_list.append(wall)
 
-        #    for x in range(0, 1250, 64):
-        #     wall = arcade.Sprite(":resources:images/tiles/grassMid.png", TILE_SCALING)
-        #     wall.center_x = x
-        #     wall.center_y = 32
-        #     self.wall_list.append(wall)
-        
+    
 
+
+        #Create Physics Engine
+        
+        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,self.wall_list,constants.GRAVITY)
 
     def on_draw(self):
         "Draw whatever is on the screen"
@@ -55,8 +61,35 @@ class Jungle(arcade.Window):
         self.wall_list.draw()
 
 
-    def on_key_press(self):
-        pass
+    def on_key_press(self, key, modifiers):
 
-    def on_key_release(self):
-        pass
+        """Tracks the user input on the Keyboard  """
+
+
+        if key == arcade.key.UP or key == arcade.key.W:
+            if self.physics_engine.can_jump():
+
+                self.player_sprite.change_y = constants.PLAYER_JUMP_SPEED
+                arcade.play_sound(self.jumping_noise)
+        elif key == arcade.key.LEFT or key == arcade.key.A:
+            self.player_sprite.change_x = (constants.PLAYER_MOVEMENT_SPEED * -1 )
+        elif key == arcade.key.RIGHT or key == arcade.key.D:
+            self.player_sprite.change_x = constants.PLAYER_MOVEMENT_SPEED
+
+
+
+    def on_key_release(self, key, modifiers):
+        """Stops the player character from moving when keyboard is not pressed  """
+
+        if key == arcade.key.LEFT or key == arcade.key.A:
+            self.player_sprite.change_x = 0
+        elif key == arcade.key.RIGHT or key == arcade.key.D:
+            self.player_sprite.change_x = 0
+
+    def on_update(self, delta_time):
+        """Movement and game logic"""
+
+        # Move the player with the physics engine
+        self.physics_engine.update()
+
+

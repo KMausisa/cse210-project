@@ -14,3 +14,8 @@ TITLE_SCALING = 1
 #Where the Play will Start
 PLAYER_START_X = 64
 PLAYER_START_Y = 225
+
+# How fast Character Moves
+PLAYER_MOVEMENT_SPEED = 3
+GRAVITY = 1
+PLAYER_JUMP_SPEED = 20
