@@ -1,5 +1,7 @@
 import arcade
 from game import constants
+from game.player import Player
+
 
 class Jungle(arcade.Window):
     "Main Application Class"
@@ -8,10 +10,14 @@ class Jungle(arcade.Window):
 
         super().__init__(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
 
-
+        #self.player = Player()
         self.player_list = None
-        self.wall_list = None
         self.player_sprite = None
+        self.wall_list = None
+        self.prize_list = None
+        self.enemy_list = None
+        
+
 
         #Our Physics Engine
         self.physics_engine = None
@@ -23,9 +29,14 @@ class Jungle(arcade.Window):
 
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.prize_list = arcade.SpriteList()
+        self.enemy_list = arcade.SpriteList()
 
         #Sounds
         self.jumping_noise = arcade.load_sound(":resources:sounds/jump2.wav")
+
+
+        # self.player_list = self.player.create_player(self.player_list, self.player_sprite)
 
         image = ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png"
         self.player_sprite = arcade.Sprite(image, constants.CHARACTER_SCALING)
@@ -43,6 +54,25 @@ class Jungle(arcade.Window):
             wall.center_y = 32
             self.wall_list.append(wall)
 
+
+        #Add Prize
+        image = ":resources:images/items/coinGold.png"
+        prize = arcade.Sprite(image, constants.COIN_SCALING)
+        prize.center_x = 800
+        prize.center_y = 200
+        self.prize_list.append(prize)
+
+        #Set up Enemys
+        enemy = arcade.Sprite(":resources:images/enemies/wormGreen.png", constants.ENEMY_SIZE)
+
+        enemy.bottom = constants.ENEMY_SIZE
+        enemy.left = constants.ENEMY_SIZE * 2
+
+        # Set enemy initial speed
+        enemy.change_x = 2
+        self.enemy_list.append(enemy)
+
+        # https://arcade.academy/examples/sprite_enemies_in_platformer.html#sprite-enemies-in-platformer
     
 
 
@@ -59,7 +89,8 @@ class Jungle(arcade.Window):
 
         self.player_list.draw()
         self.wall_list.draw()
-
+        self.prize_list.draw()
+        self.enemy_list.draw()
 
     def on_key_press(self, key, modifiers):
 
