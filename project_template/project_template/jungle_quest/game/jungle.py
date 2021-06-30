@@ -1,5 +1,7 @@
 import arcade
 from game import constants
+from game.player import Player
+import random
 
 class Jungle(arcade.Window):
     "Main Application Class"
@@ -8,10 +10,18 @@ class Jungle(arcade.Window):
 
         super().__init__(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
 
-
+        #self.player = Player()
         self.player_list = None
-        self.wall_list = None
         self.player_sprite = None
+        self.wall_list = None
+        self.prize_list = None
+        self.door_list_1 = None
+        self.door_list_2 = None
+        self.button_list_1 = None
+        self.button_list_2 = None
+        #self.enemy_list = None
+        
+        self.count = 0
 
         #Our Physics Engine
         self.physics_engine = None
@@ -23,9 +33,19 @@ class Jungle(arcade.Window):
 
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.prize_list = arcade.SpriteList()
+        self.enemy_list = arcade.SpriteList()
+        self.door_list_1 =arcade.SpriteList()
+        self.door_list_2= arcade.SpriteList()
+        self.button_list_1 = arcade.SpriteList()
+        self.button_list_2 = arcade.SpriteList()
+        #self.enemy_list = arcade.SpriteList()
 
         #Sounds
         self.jumping_noise = arcade.load_sound(":resources:sounds/jump2.wav")
+
+
+        # self.player_list = self.player.create_player(self.player_list, self.player_sprite)
 
         image = ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png"
         self.player_sprite = arcade.Sprite(image, constants.CHARACTER_SCALING)
@@ -43,7 +63,55 @@ class Jungle(arcade.Window):
             wall.center_y = 32
             self.wall_list.append(wall)
 
-    
+
+        #Add Prize
+        image = ":resources:images/items/coinGold.png"
+        prize = arcade.Sprite(image, constants.COIN_SCALING)
+        prize.center_x = 800
+        prize.center_y = 200
+        self.prize_list.append(prize)
+
+
+        # door_image = ":resources:images/tiles/stone.png" 
+        # door =arcade.Sprite(door_image, constants.TITLE_SCALING)
+        # door.center_x = 600
+        # door.center_y = 150
+        # self.door_list.append(door)
+
+        for i in range(2):
+            door = arcade.Sprite(":resources:images/tiles/doorClosed_mid.png",
+                                    constants.DOOR_SCALING)
+            if self.count != 1:
+
+                # Position the coin
+                door.center_x = 800
+                door.center_y = 175
+
+                # Add the coin to the lists
+                self.door_list_1.append(door)
+                self.count += 1
+            else:
+                door.center_x = 400
+                door.center_y = 175
+
+                # Add the coin to the lists
+                self.door_list_2.append(door)
+
+
+
+        #Add Button 1
+        button_image = ":resources:images/tiles/switchRed_pressed.png" 
+        button =arcade.Sprite(button_image, constants.BUTTON_SCALING)
+        button.center_x = 600
+        button.center_y = 125
+        self.button_list_1.append(button)
+
+        #Add Button 2
+        button_image = ":resources:images/tiles/switchGreen_pressed.png" 
+        button =arcade.Sprite(button_image, constants.BUTTON_SCALING)
+        button.center_x = 200
+        button.center_y = 125
+        self.button_list_2.append(button)
 
 
         #Create Physics Engine
@@ -59,7 +127,12 @@ class Jungle(arcade.Window):
 
         self.player_list.draw()
         self.wall_list.draw()
-
+        self.prize_list.draw()
+        self.door_list_1.draw()
+        self.door_list_2.draw()
+        self.button_list_1.draw()
+        self.button_list_2.draw()
+        #self.enemy_list.draw()
 
     def on_key_press(self, key, modifiers):
 
@@ -91,5 +164,25 @@ class Jungle(arcade.Window):
 
         # Move the player with the physics engine
         self.physics_engine.update()
+
+        self.door_list_1.update()
+        self.door_list_2.update()
+
+        # Generate a list of all sprites that collided with the player.
+        button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_1)
+        button_2_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_2)
+
+
+
+        if button_1_hit_list:
+        # Loop through each colliding sprite, remove it, and add to the score.
+            for door in self.door_list_1:
+                door.remove_from_sprite_lists()
+        elif button_2_hit_list:
+            for door in self.door_list_2:
+                door.remove_from_sprite_lists()
+
+
+        
 
 
