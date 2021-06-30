@@ -21,7 +21,11 @@ class Jungle(arcade.Window):
         self.button_list_2 = None
         #self.enemy_list = None
         
+        #Number of times you hit a door
         self.count = 0
+
+        #Total amount of Lives
+        self.lives = 3
 
         #Our Physics Engine
         self.physics_engine = None
@@ -72,29 +76,24 @@ class Jungle(arcade.Window):
         self.prize_list.append(prize)
 
 
-        # door_image = ":resources:images/tiles/stone.png" 
-        # door =arcade.Sprite(door_image, constants.TITLE_SCALING)
-        # door.center_x = 600
-        # door.center_y = 150
-        # self.door_list.append(door)
-
         for i in range(2):
             door = arcade.Sprite(":resources:images/tiles/doorClosed_mid.png",
                                     constants.DOOR_SCALING)
             if self.count != 1:
 
-                # Position the coin
+                # Position Door
                 door.center_x = 800
                 door.center_y = 175
 
-                # Add the coin to the lists
+                # Add Door 1 to the lists
                 self.door_list_1.append(door)
                 self.count += 1
             else:
+                #Position Door
                 door.center_x = 400
                 door.center_y = 175
 
-                # Add the coin to the lists
+                # Add the Door 2 to the lists
                 self.door_list_2.append(door)
 
 
@@ -133,6 +132,10 @@ class Jungle(arcade.Window):
         self.button_list_1.draw()
         self.button_list_2.draw()
         #self.enemy_list.draw()
+
+        #Draw Lives
+        output = f"Lives: {self.lives}"
+        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
 
     def on_key_press(self, key, modifiers):
 
