@@ -25,3 +25,9 @@ COIN_SCALING = 1
 
 #Size of enemy 
 ENEMY_SIZE = 1
+
+#Button Size
+BUTTON_SCALING = 0.5
+
+#Door Size
+DOOR_SCALING = 1.25
