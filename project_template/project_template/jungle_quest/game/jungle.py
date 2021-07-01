@@ -1,7 +1,7 @@
 import arcade
 from game import constants
 from game.player import Player
-import random
+from game.enemies import Enemy
 
 class Jungle(arcade.Window):
     "Main Application Class"
@@ -19,7 +19,7 @@ class Jungle(arcade.Window):
         self.door_list_2 = None
         self.button_list_1 = None
         self.button_list_2 = None
-        #self.enemy_list = None
+        self.enemy = None
         
         #Number of times you hit a door
         self.count = 0
@@ -29,6 +29,7 @@ class Jungle(arcade.Window):
 
         #Our Physics Engine
         self.physics_engine = None
+        self.physics_engine_enemy = None
 
         arcade.set_background_color(arcade.csscolor.BLACK)
 
@@ -38,12 +39,13 @@ class Jungle(arcade.Window):
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
         self.prize_list = arcade.SpriteList()
-        self.enemy_list = arcade.SpriteList()
         self.door_list_1 =arcade.SpriteList()
         self.door_list_2= arcade.SpriteList()
         self.button_list_1 = arcade.SpriteList()
         self.button_list_2 = arcade.SpriteList()
-        #self.enemy_list = arcade.SpriteList()
+        
+        #Call Enemy Class
+        self.enemy = Enemy()
 
         #Sounds
         self.jumping_noise = arcade.load_sound(":resources:sounds/jump2.wav")
@@ -71,8 +73,8 @@ class Jungle(arcade.Window):
         #Add Prize
         image = ":resources:images/items/coinGold.png"
         prize = arcade.Sprite(image, constants.COIN_SCALING)
-        prize.center_x = 800
-        prize.center_y = 200
+        prize.center_x = 950
+        prize.center_y = 175
         self.prize_list.append(prize)
 
 
@@ -116,6 +118,8 @@ class Jungle(arcade.Window):
         #Create Physics Engine
         
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,self.wall_list,constants.GRAVITY)
+        self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy.enemy,self.wall_list,constants.GRAVITY)
+        
 
     def on_draw(self):
         "Draw whatever is on the screen"
@@ -131,7 +135,7 @@ class Jungle(arcade.Window):
         self.door_list_2.draw()
         self.button_list_1.draw()
         self.button_list_2.draw()
-        #self.enemy_list.draw()
+        self.enemy.enemy_list.draw()
 
         #Draw Lives
         output = f"Lives: {self.lives}"
@@ -168,8 +172,20 @@ class Jungle(arcade.Window):
         # Move the player with the physics engine
         self.physics_engine.update()
 
+        #Move Enemy with physics engine
+        self.physics_engine_enemy.update()
+
+        self.enemy.follow_sprite(self.player_sprite)
+        #Update Doors
         self.door_list_1.update()
         self.door_list_2.update()
+
+
+        #Check if Enemy collides with Player
+        if self.player_sprite.collides_with_list(self.enemy.enemy_list):
+            arcade.close_window()
+
+
 
         # Generate a list of all sprites that collided with the player.
         button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_1)
