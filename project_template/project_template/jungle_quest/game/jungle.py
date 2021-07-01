@@ -3,13 +3,16 @@ from game import constants
 from game.player import Player
 from game.enemies import Enemy
 
+# SPRITE_SCALING = 0.5
+# SPRITE_NATIVE_SIZE = 128
+# SPRITE_SIZE = int(SPRITE_NATIVE_SIZE * SPRITE_SCALING)
+
 class Jungle(arcade.Window):
     "Main Application Class"
 
     def __init__(self):
 
         super().__init__(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
-
         #self.player = Player()
         self.player_list = None
         self.player_sprite = None
@@ -30,6 +33,7 @@ class Jungle(arcade.Window):
         #Our Physics Engine
         self.physics_engine = None
         self.physics_engine_enemy = None
+        # self.physics_engine_door_1 = None
 
         arcade.set_background_color(arcade.csscolor.BLACK)
 
@@ -70,6 +74,16 @@ class Jungle(arcade.Window):
             self.wall_list.append(wall)
 
 
+
+        #Add Platform
+        for x in range(64 * 3, 64 * 5, 64):
+            wall = arcade.Sprite(":resources:images/tiles/stone.png",0.5)
+
+            wall.center_x = 600
+            wall.center_y = 200
+            self.wall_list.append(wall)
+
+
         #Add Prize
         image = ":resources:images/items/coinGold.png"
         prize = arcade.Sprite(image, constants.COIN_SCALING)
@@ -104,7 +118,7 @@ class Jungle(arcade.Window):
         button_image = ":resources:images/tiles/switchRed_pressed.png" 
         button =arcade.Sprite(button_image, constants.BUTTON_SCALING)
         button.center_x = 600
-        button.center_y = 125
+        button.center_y = 255
         self.button_list_1.append(button)
 
         #Add Button 2
@@ -119,6 +133,8 @@ class Jungle(arcade.Window):
         
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,self.wall_list,constants.GRAVITY)
         self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy.enemy,self.wall_list,constants.GRAVITY)
+        # self.physics_engine_door_1 = arcade.PhysicsEnginePlatformer(self.player_sprite,self.door_list_2,constants.GRAVITY)
+
         
 
     def on_draw(self):
@@ -139,7 +155,7 @@ class Jungle(arcade.Window):
 
         #Draw Lives
         output = f"Lives: {self.lives}"
-        arcade.draw_text(output, 10, 20, arcade.color.WHITE, 14)
+        arcade.draw_text(output, 10, 750, arcade.color.WHITE, 25)
 
     def on_key_press(self, key, modifiers):
 
@@ -175,6 +191,8 @@ class Jungle(arcade.Window):
         #Move Enemy with physics engine
         self.physics_engine_enemy.update()
 
+        # self.physics_engine_door_1.update()
+
         self.enemy.follow_sprite(self.player_sprite)
         #Update Doors
         self.door_list_1.update()
@@ -183,6 +201,21 @@ class Jungle(arcade.Window):
 
         #Check if Enemy collides with Player
         if self.player_sprite.collides_with_list(self.enemy.enemy_list):
+            self.lives -= 1
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
+
+            if self.lives == 0:
+                arcade.close_window()
+
+        self.prize_list.update()
+
+        # Generate a list of all sprites that collided with the player.
+        coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.prize_list)
+
+        # Loop through each colliding sprite, remove it, and add to the score.
+        for coin in coins_hit_list:
+            coin.remove_from_sprite_lists()
             arcade.close_window()
 
 
