@@ -17,7 +17,7 @@ PLAYER_START_Y = 225
 
 # How fast Character Moves
 PLAYER_MOVEMENT_SPEED = 5
-GRAVITY = 0.75
+GRAVITY = .75
 PLAYER_JUMP_SPEED = 20
 
 #Size of Prize
