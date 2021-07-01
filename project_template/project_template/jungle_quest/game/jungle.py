@@ -205,8 +205,7 @@ class Jungle(arcade.Window):
             self.player_sprite.center_x = constants.PLAYER_START_X
             self.player_sprite.center_y = constants.PLAYER_START_Y
 
-            if self.lives == 0:
-                arcade.close_window()
+        
 
         self.prize_list.update()
 
@@ -218,7 +217,19 @@ class Jungle(arcade.Window):
             coin.remove_from_sprite_lists()
             arcade.close_window()
 
+        # Generate a list of all sprites that collided with the player.
+        if self.player_sprite.collides_with_list(self.door_list_1):
+            self.lives -= 1
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
+        elif self.player_sprite.collides_with_list(self.door_list_2):
+            self.lives -= 1
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
 
+
+        if self.lives == 0:
+            arcade.close_window()
 
         # Generate a list of all sprites that collided with the player.
         button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_1)
