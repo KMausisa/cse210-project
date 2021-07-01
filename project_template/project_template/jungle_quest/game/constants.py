@@ -16,6 +16,15 @@ PLAYER_START_X = 64
 PLAYER_START_Y = 225
 
 # How fast Character Moves
-PLAYER_MOVEMENT_SPEED = 3
-GRAVITY = 1
+PLAYER_MOVEMENT_SPEED = 5
+GRAVITY = 0.75
 PLAYER_JUMP_SPEED = 20
+
+# Where the first enemy will start
+ENEMY_START_X = 512
+ENEMY_START_Y = 225
+
+# How fast the enemy will move
+ENEMY_MOVEMENT_SPEED = 1
+
+

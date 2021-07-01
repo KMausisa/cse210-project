@@ -1,5 +1,6 @@
 import arcade
 from game import constants
+from game.enemies import Enemy
 
 class Jungle(arcade.Window):
     "Main Application Class"
@@ -12,9 +13,11 @@ class Jungle(arcade.Window):
         self.player_list = None
         self.wall_list = None
         self.player_sprite = None
+        self.enemy = None
 
         #Our Physics Engine
-        self.physics_engine = None
+        self.physics_engine_player = None
+        self.physics_engine_enemy = None
 
         arcade.set_background_color(arcade.csscolor.BLACK)
 
@@ -23,6 +26,7 @@ class Jungle(arcade.Window):
 
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
+        self.enemy = Enemy()
 
         #Sounds
         self.jumping_noise = arcade.load_sound(":resources:sounds/jump2.wav")
@@ -38,17 +42,14 @@ class Jungle(arcade.Window):
 
         for x in range(0, 1250, 64):
             ground_image = ":resources:images/tiles/stone.png" 
-            wall =arcade.Sprite(ground_image, constants.TITLE_SCALING)
+            wall = arcade.Sprite(ground_image, constants.TITLE_SCALING)
             wall.center_x = x
             wall.center_y = 32
             self.wall_list.append(wall)
 
-    
-
-
         #Create Physics Engine
-        
-        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,self.wall_list,constants.GRAVITY)
+        self.physics_engine_player = arcade.PhysicsEnginePlatformer(self.player_sprite, self.wall_list,constants.GRAVITY)
+        self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy.enemy, self.wall_list, constants.GRAVITY)
 
     def on_draw(self):
         "Draw whatever is on the screen"
@@ -59,6 +60,7 @@ class Jungle(arcade.Window):
 
         self.player_list.draw()
         self.wall_list.draw()
+        self.enemy.enemy_list.draw()
 
 
     def on_key_press(self, key, modifiers):
@@ -67,10 +69,10 @@ class Jungle(arcade.Window):
 
 
         if key == arcade.key.UP or key == arcade.key.W:
-            if self.physics_engine.can_jump():
+            if self.physics_engine_player.can_jump():
 
                 self.player_sprite.change_y = constants.PLAYER_JUMP_SPEED
-                arcade.play_sound(self.jumping_noise)
+                # arcade.play_sound(self.jumping_noise)
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player_sprite.change_x = (constants.PLAYER_MOVEMENT_SPEED * -1 )
         elif key == arcade.key.RIGHT or key == arcade.key.D:
@@ -90,6 +92,20 @@ class Jungle(arcade.Window):
         """Movement and game logic"""
 
         # Move the player with the physics engine
-        self.physics_engine.update()
+        self.physics_engine_player.update()
+        self.physics_engine_enemy.update()
+
+        # enemy sprite will follow the player sprite
+        self.enemy.follow_sprite(self.player_sprite)
+
+        
+        # Checks for collision with enemies
+        if self.player_sprite.collides_with_list(self.enemy.enemy_list):
+            # if self.player_sprite.center_y > (self.enemy.enemy.center_y + 64):
+            #     self.enemy.remove_from_sprite_lists()
+            # elif self.player_sprite.center_y < (self.enemy.enemy.center_y + 64):
+            arcade.close_window()
+
+
 
 
