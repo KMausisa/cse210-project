@@ -17,8 +17,20 @@ PLAYER_START_Y = 225
 
 # How fast Character Moves
 PLAYER_MOVEMENT_SPEED = 5
-GRAVITY = 0.75
+GRAVITY = .75
 PLAYER_JUMP_SPEED = 20
+
+#Size of Prize
+COIN_SCALING = 1
+
+#Size of enemy 
+ENEMY_SIZE = 1
+
+#Button Size
+BUTTON_SCALING = 0.5
+
+#Door Size
+DOOR_SCALING = 1.25
 
 # Where the first enemy will start
 ENEMY_START_X = 512
@@ -26,5 +38,4 @@ ENEMY_START_Y = 225
 
 # How fast the enemy will move
 ENEMY_MOVEMENT_SPEED = 1
-
 
