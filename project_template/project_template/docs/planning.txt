@@ -63,7 +63,7 @@ One feature that might be beyond our skill level is programming the music challe
 (1) Game Scene
 •	(1)Playable Character
 •	(1)Wandering enemies 
-•	(1)Opening/closing doors
+•	(1)Opening doors
 •	(2)Music Note Challenge
 •	(2)Floating Brick Challenge
 •	(1)Choosing the right Prize

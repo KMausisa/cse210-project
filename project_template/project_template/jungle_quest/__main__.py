@@ -1,13 +1,15 @@
 # program entry point
 import arcade
 from game.jungle import Jungle
+from game import constants
+from game.instruction_window import InstructionView
 
 def main():
     """ Main method """
 
-    
-    window = Jungle()
-    window.setup()
+    window = arcade.Window(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
+    start_view= InstructionView()
+    window.show_view(start_view)
     arcade.run()
 
 

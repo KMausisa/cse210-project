@@ -2,17 +2,19 @@ import arcade
 from game import constants
 from game.player import Player
 from game.enemies import Enemy
+from game.game_over_window import GameOverView
+from game.winner_window import WinnerView
 
 # SPRITE_SCALING = 0.5
 # SPRITE_NATIVE_SIZE = 128
 # SPRITE_SIZE = int(SPRITE_NATIVE_SIZE * SPRITE_SCALING)
 
-class Jungle(arcade.Window):
+class Jungle(arcade.View):
     "Main Application Class"
 
     def __init__(self):
 
-        super().__init__(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
+        super().__init__()
         #self.player = Player()
         self.player_list = None
         self.player_sprite = None
@@ -23,6 +25,8 @@ class Jungle(arcade.Window):
         self.button_list_1 = None
         self.button_list_2 = None
         self.enemy = None
+        
+        self.window.set_mouse_visible(False)
         
         #Number of times you hit a door
         self.count = 0
@@ -39,6 +43,13 @@ class Jungle(arcade.Window):
 
     def setup(self):
         """Sets up the charcter,walls, and primitive sound. """
+
+        #Set up background music
+        # self.background_music = arcade.load_sound(
+        # ":resources:music/1918.mp3"
+        # )
+
+        # arcade.play_sound(self.background_music)
 
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
@@ -215,7 +226,8 @@ class Jungle(arcade.Window):
         # Loop through each colliding sprite, remove it, and add to the score.
         for coin in coins_hit_list:
             coin.remove_from_sprite_lists()
-            arcade.close_window()
+            view = WinnerView()
+            self.window.show_view(view)
 
         # Generate a list of all sprites that collided with the player.
         if self.player_sprite.collides_with_list(self.door_list_1):
@@ -229,7 +241,8 @@ class Jungle(arcade.Window):
 
 
         if self.lives == 0:
-            arcade.close_window()
+            view = GameOverView()
+            self.window.show_view(view)
 
         # Generate a list of all sprites that collided with the player.
         button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_1)
