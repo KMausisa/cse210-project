@@ -58,7 +58,7 @@ class Jungle(arcade.Window):
         # self.player_list = self.player.create_player(self.player_list, self.player_sprite)
 
         image = ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png"
-        self.player_sprite = arcade.Sprite(image, constants.CHARACTER_SCALING)
+        self.player_sprite = Player()
         self.player_sprite.center_x = constants.PLAYER_START_X
         self.player_sprite.center_y = constants.PLAYER_START_Y
         self.player_list.append(self.player_sprite)
@@ -191,6 +191,9 @@ class Jungle(arcade.Window):
 
         # enemy sprite will follow the player sprite
         self.enemy.follow_sprite(self.player_sprite)
+
+        # update player
+        self.player_list.update_animation(delta_time)
 
         
         # Checks for collision with enemies
