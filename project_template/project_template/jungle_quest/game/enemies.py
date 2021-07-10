@@ -26,7 +26,8 @@ class Enemy(arcade.Sprite):
         enemy_image = ":resources:/images/enemies/slimeBlue.png"
 
         self.enemy = arcade.Sprite(enemy_image)
-        # self.enemy.textures = []
+
+        self.enemy.textures = []
 
         # Append textures to the list
         # self.enemy.textures.append(arcade.load_texture(enemy_image))
