@@ -2,17 +2,17 @@ import arcade
 from game import constants
 from game.player import Player
 from game.enemies import Enemy
+from game.game_over_window import GameOverView
+from game.winner_window import WinnerView
 
 # SPRITE_SCALING = 0.5
 # SPRITE_NATIVE_SIZE = 128
 # SPRITE_SIZE = int(SPRITE_NATIVE_SIZE * SPRITE_SCALING)
 
-class Jungle(arcade.Window):
+class Jungle(arcade.View):
     "Main Application Class"
 
     def __init__(self):
-
-        super().__init__(constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT, constants.SCREEN_TITLE)
 
         # Lists for Map Layers
         self.wall_list = None
@@ -20,6 +20,9 @@ class Jungle(arcade.Window):
         self.background_2_list = None
 
         # Lists for Entities
+        super().__init__()
+        #self.player = Player()
+
         self.player_list = None
         self.player_sprite = None
         self.prize_list = None
@@ -28,6 +31,8 @@ class Jungle(arcade.Window):
         self.button_list_1 = None
         self.button_list_2 = None
         self.enemy = None
+        
+        self.window.set_mouse_visible(False)
         
         #Number of times you hit a door
         self.count = 0
@@ -44,6 +49,16 @@ class Jungle(arcade.Window):
 
     def setup(self):
         """Sets up the charcter,walls, and primitive sound. """
+
+        #Set up background music
+        # self.background_music = arcade.load_sound(
+        # ":resources:music/1918.mp3"
+        # )
+
+        # arcade.play_sound(self.background_music)
+        
+        self.game_over = arcade.load_sound(":resources:sounds/gameover3.wav")
+        self.button_press = arcade.load_sound(":resources:sounds/secret2.wav")
 
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
@@ -130,6 +145,7 @@ class Jungle(arcade.Window):
 
 
 
+
         # Add Button 1
         self.button = arcade.Sprite(constants.BUTTON_PATH, constants.BUTTON_SCALING)
         self.button.center_x = 196
@@ -142,6 +158,21 @@ class Jungle(arcade.Window):
         # button.center_x = 200
         # button.center_y = 125
         # self.button_list_2.append(button)
+
+        #Add Button 1
+        #button_image = ":resources:images/tiles/switchRed_pressed.png" 
+        #button =arcade.Sprite(button_image, constants.BUTTON_SCALING)
+        #button.center_x = 600
+        #button.center_y = 255
+        #self.button_list_1.append(button)
+        #":resources:images/tiles/switchGreen_pressed.png"
+        #Add Button 2
+        #button_image = ":resources:images/tiles/switchRed_pressed.png" 
+        #button =arcade.Sprite(button_image, constants.BUTTON_SCALING)
+        #button.center_x = 200
+        #button.center_y = 125
+        #self.button_list_2.append(button)
+
 
 
         #Create Physics Engine
@@ -238,11 +269,12 @@ class Jungle(arcade.Window):
 
 
         #Check if Enemy collides with Player
-        # if self.player_sprite.collides_with_list(self.enemy.enemy_list):
-        #     self.lives -= 1
-        #     self.player_sprite.center_x = constants.PLAYER_START_X
-        #     self.player_sprite.center_y = constants.PLAYER_START_Y
 
+        if self.player_sprite.collides_with_list(self.enemy.enemy_list):
+            self.lives -= 1
+            arcade.play_sound(self.game_over)
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
         
 
         # self.prize_list.update()
@@ -251,23 +283,29 @@ class Jungle(arcade.Window):
         # coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.prize_list)
 
         # Loop through each colliding sprite, remove it, and add to the score.
-        # for coin in coins_hit_list:
-        #     coin.remove_from_sprite_lists()
-        #     arcade.close_window()
 
-        # # Generate a list of all sprites that collided with the player.
-        # if self.player_sprite.collides_with_list(self.door_list_1):
-        #     self.lives -= 1
-        #     self.player_sprite.center_x = constants.PLAYER_START_X
-        #     self.player_sprite.center_y = constants.PLAYER_START_Y
-        # elif self.player_sprite.collides_with_list(self.door_list_2):
-        #     self.lives -= 1
-        #     self.player_sprite.center_x = constants.PLAYER_START_X
-        #     self.player_sprite.center_y = constants.PLAYER_START_Y
+        for coin in coins_hit_list:
+            coin.remove_from_sprite_lists()
+            view = WinnerView()
+            self.window.show_view(view)
+
+        # Generate a list of all sprites that collided with the player.
+        if self.player_sprite.collides_with_list(self.door_list_1):
+            self.lives -= 1
+            arcade.play_sound(self.game_over)
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
+        elif self.player_sprite.collides_with_list(self.door_list_2):
+            self.lives -= 1
+            arcade.play_sound(self.game_over)
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
 
 
-        # if self.lives == 0:
-        #     arcade.close_window()
+        if self.lives == 0:
+    
+            view = GameOverView()
+            self.window.show_view(view)
 
         # # Generate a list of all sprites that collided with the player.
         button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_1)
@@ -278,11 +316,16 @@ class Jungle(arcade.Window):
         if button_1_hit_list:
         # Loop through each colliding sprite, remove it, and add to the score.
             for door in self.door_list_1:
+                arcade.play_sound(self.button_press)
                 door.remove_from_sprite_lists()
-                self.prize_list.append(self.prize)
-        # elif button_2_hit_list:
-        #     for door in self.door_list_2:
-        #         door.remove_from_sprite_lists()
+
+            self.prize_list.append(self.prize)
+
+#         elif button_2_hit_list:
+#             for door in self.door_list_2:
+#                 arcade.play_sound(self.button_press)
+#                 door.remove_from_sprite_lists()
+
 
 
         
