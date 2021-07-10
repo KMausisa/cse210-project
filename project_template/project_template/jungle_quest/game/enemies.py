@@ -1,4 +1,5 @@
 from game import constants
+from game.load_texture_pair import load_texture_pair
 import arcade
 
 class Enemy(arcade.Sprite):
@@ -11,32 +12,15 @@ class Enemy(arcade.Sprite):
             self (Enemy): An instance of Enemy.
         """
         super().__init__()
-        self.enemy = None
-        self.enemy_list = None
-
-        self._setup()
-
-    def _setup(self):
-        """Creates the enemy sprites
-
-        Args:
-            self (Enemy): An instance of Enemy
-        """
-        self.enemy_list = arcade.SpriteList()
-        enemy_image = ":resources:/images/enemies/slimeBlue.png"
-
-        self.enemy = arcade.Sprite(enemy_image, constants.ENEMY_SIZE)
-
-        self.enemy.textures = []
-
-        # Append textures to the list
-        # self.enemy.textures.append(arcade.load_texture(enemy_image))
-        # self.enemy.textures.append(arcade.load_texture(enemy_image, flipped_vertically=True))
-
-        self.enemy.center_x = constants.ENEMY_START_X
-        self.enemy.center_y = constants.ENEMY_START_Y
         
-        self.enemy_list.append(self.enemy)
+        self.scale = constants.ENEMY_SIZE
+        
+        # Load texture pair
+        self.idle_texture_pair = load_texture_pair(constants.ENEMY_PATH)
+
+        # set the initial texture
+        self.texture = self.idle_texture_pair[0]
+        
 
     def follow_sprite(self, player_sprite):
         """This function will move the current sprite towards whatever
@@ -47,11 +31,11 @@ class Enemy(arcade.Sprite):
         an exact multiple of SPRITE_SPEED.
         """
 
-        if self.enemy.center_x < player_sprite.center_x:
-            self.enemy.center_x += min(constants.ENEMY_MOVEMENT_SPEED, player_sprite.center_x - self.enemy.center_x)
+        if self.center_x < player_sprite.center_x:
+            self.center_x += min(constants.ENEMY_MOVEMENT_SPEED, player_sprite.center_x - self.center_x)
             # self.enemy.cur_texture_index = 0
-        elif self.enemy.center_x > player_sprite.center_x:
-            self.enemy.center_x -= min(constants.ENEMY_MOVEMENT_SPEED, self.enemy.center_x - player_sprite.center_x)
+        elif self.center_x > player_sprite.center_x:
+            self.center_x -= min(constants.ENEMY_MOVEMENT_SPEED, self.center_x - player_sprite.center_x)
             # self.enemy.cur_texture_index = 1
 
     

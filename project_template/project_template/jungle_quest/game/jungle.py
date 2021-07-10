@@ -29,13 +29,16 @@ class Jungle(arcade.View):
 
         self.player_list = None
         self.player_sprite = None
+
+        self.enemy = None
+        self.enemy_list = None
+
         self.prize_list = None
         self.prize_fake_list = None
         self.door_list_1 = None
         self.door_list_2 = None
         self.button_list_1 = None
         self.button_list_2 = None
-        self.enemy = None
         
         self.window.set_mouse_visible(False)
         
@@ -66,6 +69,7 @@ class Jungle(arcade.View):
         self.button_press = arcade.load_sound(":resources:sounds/secret2.wav")
 
         self.player_list = arcade.SpriteList()
+        self.enemy_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
         self.prize_list = arcade.SpriteList()
         self.door_list_1 =arcade.SpriteList()
@@ -75,6 +79,9 @@ class Jungle(arcade.View):
         
         #Call Enemy Class
         self.enemy = Enemy()
+        self.enemy.center_x = constants.ENEMY_START_X
+        self.enemy.center_y = constants.ENEMY_START_Y
+        self.enemy_list.append(self.enemy)
 
         self.view_left = 0
         self.view_bottom = 0
@@ -144,10 +151,6 @@ class Jungle(arcade.View):
                                                             layer_name=real_coin_name,
                                                             scaling=constants.MAP_SCALING,
                                                             use_spatial_hash=True)                                                    
-
-        self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,
-                                                             self.wall_list,
-                                                             constants.GRAVITY)
 
         # --- Other Stuff
 
@@ -222,7 +225,7 @@ class Jungle(arcade.View):
         #Create Physics Engine
         
         self.physics_engine_player = arcade.PhysicsEnginePlatformer(self.player_sprite,self.wall_list,constants.GRAVITY)
-        self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy.enemy,self.wall_list,constants.GRAVITY)
+        self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy,self.wall_list,constants.GRAVITY)
         # self.physics_engine_door_1 = arcade.PhysicsEnginePlatformer(self.player_sprite,self.door_list_2,constants.GRAVITY)
 
         
@@ -246,16 +249,15 @@ class Jungle(arcade.View):
         self.switch_list_2.draw()
         # self.button_list_1.draw()
         # self.button_list_2.draw()
-        self.enemy.enemy_list.draw()
+        self.enemy_list.draw()
 
         #Draw Lives
         output = f"Lives: {self.lives}"
-        arcade.draw_text(output, 10, 500, arcade.color.WHITE, 25)
-
-        arcade.draw_text(text=f"Player Center X: {self.player_sprite.center_x}",
-                         start_x=16,
-                         start_y=16,
-                         color=arcade.csscolor.WHITE)
+        arcade.draw_text(output, 
+                        start_x=10 + self.view_left, 
+                        start_y= 10 + self.view_bottom, 
+                        color=arcade.csscolor.WHITE, 
+                        font_size=18)
 
     def on_key_press(self, key, modifiers):
 
@@ -318,7 +320,7 @@ class Jungle(arcade.View):
 
         #Check if Enemy collides with Player
 
-        if self.player_sprite.collides_with_list(self.enemy.enemy_list):
+        if self.player_sprite.collides_with_list(self.enemy_list):
             self.lives -= 1
             arcade.play_sound(self.game_over)
             self.player_sprite.center_x = constants.PLAYER_START_X

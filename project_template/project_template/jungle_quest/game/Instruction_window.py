@@ -3,23 +3,33 @@ from game import constants
 from game.jungle import Jungle
 
 class InstructionView(arcade.View):
-
+    """A class that defines the starting window or the window the user will first see.
+    It will display the name of the game, how to start the game, and the instructions for how to play.
+    """
     def __init__(self):
+        """Class constructor. This class loads the textures/images for the window.
+        """
         super().__init__()
-        self.player_image = arcade.load_texture(":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png")
 
-        self.enemy_image = arcade.load_texture(":resources:/images/enemies/slimeBlue.png")
+        # Load player image
+        self.player_image = arcade.load_texture(constants.PLAYER_IMG_TEST)
 
-        self.background_music = arcade.load_sound(
-        ":resources:music/1918.mp3"
-        )
+         # Load enemy image
+        self.enemy_image = arcade.load_texture(constants.ENEMY_PATH)
 
-        self.coin_image = arcade.load_texture(":resources:images/items/coinGold.png")
+        # Load background music
+        self.background_music = arcade.load_sound(":resources:music/1918.mp3")
 
-        self.door_image = arcade.load_texture(":resources:images/tiles/doorClosed_mid.png")
+        # Load coin image
+        self.coin_image = arcade.load_texture(constants.COIN_PATH)
 
-        self.switch_image = arcade.load_texture(":resources:images/tiles/switchRed_pressed.png")
+        # Load door image
+        self.door_image = arcade.load_texture(constants.DOOR_PATH)
 
+        # Load switch image
+        self.switch_image = arcade.load_texture(constants.SWITCH_PATH)
+
+        # Load background music
         arcade.play_sound(self.background_music)
 
 
@@ -35,29 +45,65 @@ class InstructionView(arcade.View):
     def on_draw(self):
         """ Draw this view """
         arcade.start_render()
-        arcade.draw_text("Jungle Quest", constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2, arcade.color.WHITE, font_size=50, anchor_x="center")
+
+        # Display the Name of the game
+        arcade.draw_text(text="Jungle Quest", start_x=constants.SCREEN_WIDTH / 2, start_y=(constants.SCREEN_HEIGHT - 150), 
+                         color=arcade.color.WHITE, font_size=50, anchor_x="center")
         
-        arcade.draw_text("Click to advance", constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2-75, arcade.color.WHITE, font_size=20, anchor_x="center")
+        # Display the user input to start the game
+        arcade.draw_text(text="Click to advance", start_x=constants.SCREEN_WIDTH / 2, start_y=(constants.SCREEN_HEIGHT - 200), 
+                         color=arcade.color.WHITE, font_size=20, anchor_x="center")
 
-        self.player_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-125, 50, 75)
+        # -- PLAYER --
 
-        arcade.draw_text("Playable Adventurer", 430, constants.SCREEN_HEIGHT / 2-150, arcade.color.WHITE, font_size=15, anchor_x="center")
+        # Draw the player the user will control
+        self.player_image.draw_sized(center_x=250, center_y=(constants.SCREEN_HEIGHT - 300), 
+                                     width=36, height=36)
 
-        self.enemy_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-175, 60, 75)
+        # Description of the player
+        arcade.draw_text(text="Playable Adventurer", start_x=430, start_y=(constants.SCREEN_HEIGHT - 315), 
+                         color=arcade.color.WHITE, font_size=15, anchor_x="center")
 
-        arcade.draw_text("Wandering Enemies. They will kill you!", 500, constants.SCREEN_HEIGHT / 2-210, arcade.color.WHITE, font_size=15, anchor_x="center")
+        # -- ENEMY --
 
-        self.coin_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-250, 90, 75)
+        # Draw the enemy the user will have to avoid
+        self.enemy_image.draw_sized(center_x=250, center_y=(constants.SCREEN_HEIGHT - 350), 
+                                    width=36, height=36)
 
-        arcade.draw_text("Get the prize to win the game!  Careful! There is a flase Prize!", 585, constants.SCREEN_HEIGHT / 2-260, arcade.color.WHITE, font_size=15, anchor_x="center")
+        # Description of the enemy
+        arcade.draw_text(text="Wandering Enemies. They will kill you!", start_x=430, start_y=(constants.SCREEN_HEIGHT - 365), 
+                         color=arcade.color.WHITE, font_size=15, anchor_x="center")
 
-        self.door_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-310, 50, 50)
+        # -- COIN -- 
 
-        arcade.draw_text("This is the door. Hit the switch to get through it.  It can hurt you.", 595, constants.SCREEN_HEIGHT / 2-315, arcade.color.WHITE, font_size=15, anchor_x="center")
+        # Draw the coin the user will have to get 
+        self.coin_image.draw_sized(center_x=250, center_y=(constants.SCREEN_HEIGHT - 405), 
+                                   width=36, height=36)
 
-        self.switch_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-355, 50, 60)
+        # Description of the coin
+        arcade.draw_text(text="Get the prize to win the game!\nCareful! There is a fake prize!", 
+                         start_x=430, start_y=(constants.SCREEN_HEIGHT - 420), 
+                         color=arcade.color.WHITE, font_size=15, 
+                         align="center", anchor_x="center")
 
-        arcade.draw_text("Hit this switch to open the door.", 595, constants.SCREEN_HEIGHT / 2-375, arcade.color.WHITE, font_size=15, anchor_x="center")
+
+        # -- DOOR --
+
+        # Draw the door the user has to open
+        self.door_image.draw_sized(center_x=230, center_y=(constants.SCREEN_HEIGHT - 455), 
+                                   width=36, height=36)
+
+        # Description of the door
+        arcade.draw_text(text="This is the door. Hit the switch to\nget through it. It can hurt you.", 
+                         start_x=430, start_y=(constants.SCREEN_HEIGHT - 475), 
+                         color=arcade.color.WHITE, font_size=15, 
+                         align="center", anchor_x="center")
+
+        # -- SWITCH --
+
+        # Draw the switch the user has to use to open
+        self.switch_image.draw_sized(center_x=280, center_y=(constants.SCREEN_HEIGHT - 455), 
+                                     width=36, height=36)
 
 
         

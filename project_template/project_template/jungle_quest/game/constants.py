@@ -7,8 +7,7 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 
 #Length and Width of Play screen
 SCREEN_WIDTH = 720
-# SCREEN_HEIGHT= 540
-SCREEN_HEIGHT = 700
+SCREEN_HEIGHT= 540
 SCREEN_TITLE = "Jungle Quest"
 
 #Size of Ground and of Character
@@ -38,20 +37,14 @@ LEFT_FACING = 0
 #Size of Prize
 COIN_SCALING = 0.4
 
+
+# -- Enemy --
+
+# Enemy Path
+ENEMY_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Characters', 'character_0015.png')
+
 #Size of enemy 
-ENEMY_SIZE = 0.5
-
-# Button path
-BUTTON_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0064.png')
-
-#Button Size
-BUTTON_SCALING = 2
-
-# Door Path
-DOOR_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0130.png')
-
-#Door Size
-DOOR_SCALING = 2
+ENEMY_SIZE = 1.5
 
 # Where the first enemy will start
 ENEMY_START_X = 512
@@ -59,6 +52,35 @@ ENEMY_START_Y = 256
 
 # How fast the enemy will move
 ENEMY_MOVEMENT_SPEED = 1
+
+
+# -- Button
+
+# Button path
+BUTTON_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0064.png')
+
+#Button Size
+BUTTON_SCALING = 2
+
+
+# -- Door --
+
+# Door Path
+DOOR_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0130.png')
+
+#Door Size
+DOOR_SCALING = 2
+
+# -- SWITCH --
+
+# Switch Path
+SWITCH_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0064.png')
+
+
+# -- Coin --
+
+# Coin Path
+COIN_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0151.png')
 
 # Viewport
 LEFT_VIEWPORT_MARGIN = 250

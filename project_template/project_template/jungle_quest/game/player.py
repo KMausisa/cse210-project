@@ -39,9 +39,6 @@ class Player(arcade.Sprite):
             elif self.change_x > 0 and self.character_face_direction == constants.LEFT_FACING:
                 self.character_face_direction = constants.RIGHT_FACING
             
-            # Idle animation
-            if self.change_x == 0:
-                self.texture = self.idle_texture_pair[self.character_face_direction]
-                return
+            self.texture = self.idle_texture_pair[self.character_face_direction]
 
             
