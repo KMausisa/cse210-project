@@ -36,9 +36,12 @@ class Player(arcade.Sprite):
             # Figure out if we need to flip face left or right
             if self.change_x < 0 and self.character_face_direction == constants.RIGHT_FACING:
                 self.character_face_direction = constants.LEFT_FACING
-                self.texture = self.idle_texture_pair[self.character_face_direction]
             elif self.change_x > 0 and self.character_face_direction == constants.LEFT_FACING:
                 self.character_face_direction = constants.RIGHT_FACING
+            
+            # Idle animation
+            if self.change_x == 0:
                 self.texture = self.idle_texture_pair[self.character_face_direction]
+                return
 
             

@@ -102,25 +102,23 @@ class Jungle(arcade.Window):
         # --- Other Stuff
 
 
-        #Add Prize
-        # image = ":resources:images/items/coinGold.png"
-        # prize = arcade.Sprite(image, constants.COIN_SCALING)
-        # prize.center_x = 950
-        # prize.center_y = 175
-        # self.prize_list.append(prize)
+        # Add Prize
+        image = ":resources:images/items/coinGold.png"
+        self.prize = arcade.Sprite(image, constants.COIN_SCALING)
+        self.prize.center_x = 690
+        self.prize.center_y = 64
 
 
         # for i in range(2):
-        #     door = arcade.Sprite(":resources:images/tiles/doorClosed_mid.png",
-        #                             constants.DOOR_SCALING)
+        self.door = arcade.Sprite(constants.DOOR_PATH, constants.DOOR_SCALING)
         #     if self.count != 1:
 
-        #         # Position Door
-        #         door.center_x = 800
-        #         door.center_y = 175
+            # Position Door
+        self.door.center_x = 700
+        self.door.center_y = 54
 
         #         # Add Door 1 to the lists
-        #         self.door_list_1.append(door)
+        self.door_list_1.append(self.door)
         #         self.count += 1
         #     else:
         #         #Position Door
@@ -132,12 +130,11 @@ class Jungle(arcade.Window):
 
 
 
-        #Add Button 1
-        # button_image = ":resources:images/tiles/switchRed_pressed.png" 
-        # button =arcade.Sprite(button_image, constants.BUTTON_SCALING)
-        # button.center_x = 600
-        # button.center_y = 255
-        # self.button_list_1.append(button)
+        # Add Button 1
+        self.button = arcade.Sprite(constants.BUTTON_PATH, constants.BUTTON_SCALING)
+        self.button.center_x = 196
+        self.button.center_y = 305
+        self.button_list_1.append(self.button)
 
         # #Add Button 2
         # button_image = ":resources:images/tiles/switchGreen_pressed.png" 
@@ -166,16 +163,21 @@ class Jungle(arcade.Window):
         self.background_2_list.draw()
         self.wall_list.draw()
         self.player_list.draw()
-        # self.prize_list.draw()
-        # self.door_list_1.draw()
+        self.prize_list.draw()
+        self.door_list_1.draw()
         # self.door_list_2.draw()
-        # self.button_list_1.draw()
+        self.button_list_1.draw()
         # self.button_list_2.draw()
         # self.enemy.enemy_list.draw()
 
         #Draw Lives
         output = f"Lives: {self.lives}"
         arcade.draw_text(output, 10, 750, arcade.color.WHITE, 25)
+
+        arcade.draw_text(text=f"Player Center X: {self.player_sprite.center_x}",
+                         start_x=16,
+                         start_y=16,
+                         color=arcade.csscolor.WHITE)
 
     def on_key_press(self, key, modifiers):
 
@@ -184,7 +186,6 @@ class Jungle(arcade.Window):
 
         if key == arcade.key.UP or key == arcade.key.W:
             if self.physics_engine_player.can_jump():
-
                 self.player_sprite.change_y = constants.PLAYER_JUMP_SPEED
                 # arcade.play_sound(self.jumping_noise)
         elif key == arcade.key.LEFT or key == arcade.key.A:
@@ -269,15 +270,16 @@ class Jungle(arcade.Window):
         #     arcade.close_window()
 
         # # Generate a list of all sprites that collided with the player.
-        # button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_1)
+        button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_1)
         # button_2_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_2)
 
 
 
-        # if button_1_hit_list:
-        # # Loop through each colliding sprite, remove it, and add to the score.
-        #     for door in self.door_list_1:
-        #         door.remove_from_sprite_lists()
+        if button_1_hit_list:
+        # Loop through each colliding sprite, remove it, and add to the score.
+            for door in self.door_list_1:
+                door.remove_from_sprite_lists()
+                self.prize_list.append(self.prize)
         # elif button_2_hit_list:
         #     for door in self.door_list_2:
         #         door.remove_from_sprite_lists()
