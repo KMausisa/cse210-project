@@ -50,6 +50,9 @@ class Jungle(arcade.View):
         # )
 
         # arcade.play_sound(self.background_music)
+        
+        self.game_over = arcade.load_sound(":resources:sounds/gameover3.wav")
+        self.button_press = arcade.load_sound(":resources:sounds/secret2.wav")
 
         self.player_list = arcade.SpriteList()
         self.wall_list = arcade.SpriteList()
@@ -131,9 +134,9 @@ class Jungle(arcade.View):
         button.center_x = 600
         button.center_y = 255
         self.button_list_1.append(button)
-
+        #":resources:images/tiles/switchGreen_pressed.png"
         #Add Button 2
-        button_image = ":resources:images/tiles/switchGreen_pressed.png" 
+        button_image = ":resources:images/tiles/switchRed_pressed.png" 
         button =arcade.Sprite(button_image, constants.BUTTON_SCALING)
         button.center_x = 200
         button.center_y = 125
@@ -213,6 +216,7 @@ class Jungle(arcade.View):
         #Check if Enemy collides with Player
         if self.player_sprite.collides_with_list(self.enemy.enemy_list):
             self.lives -= 1
+            arcade.play_sound(self.game_over)
             self.player_sprite.center_x = constants.PLAYER_START_X
             self.player_sprite.center_y = constants.PLAYER_START_Y
 
@@ -232,15 +236,18 @@ class Jungle(arcade.View):
         # Generate a list of all sprites that collided with the player.
         if self.player_sprite.collides_with_list(self.door_list_1):
             self.lives -= 1
+            arcade.play_sound(self.game_over)
             self.player_sprite.center_x = constants.PLAYER_START_X
             self.player_sprite.center_y = constants.PLAYER_START_Y
         elif self.player_sprite.collides_with_list(self.door_list_2):
             self.lives -= 1
+            arcade.play_sound(self.game_over)
             self.player_sprite.center_x = constants.PLAYER_START_X
             self.player_sprite.center_y = constants.PLAYER_START_Y
 
 
         if self.lives == 0:
+    
             view = GameOverView()
             self.window.show_view(view)
 
@@ -253,9 +260,11 @@ class Jungle(arcade.View):
         if button_1_hit_list:
         # Loop through each colliding sprite, remove it, and add to the score.
             for door in self.door_list_1:
+                arcade.play_sound(self.button_press)
                 door.remove_from_sprite_lists()
         elif button_2_hit_list:
             for door in self.door_list_2:
+                arcade.play_sound(self.button_press)
                 door.remove_from_sprite_lists()
 
 
