@@ -1,5 +1,9 @@
 import os
 
+# Gets the absolute path to the current file
+PATH = os.path.dirname(os.path.abspath(__file__))
+PLAYER_IMG_TEST = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Characters', 'character_0000.png')
+
 #Establish Constants in the game
 
 #Length and Width of Play screen
@@ -12,6 +16,7 @@ CHARACTER_SCALING = 1
 TITLE_SCALING = 1
 
 # Player image
+PLAYER_IMG = "assets/kenney_pixelplatformer/Characters/character_0000.png"
 PLAYER_IMG = "assets/kenney_pixelplatformer/Characters/character_0000.png"
 
 #Where the Play will Start

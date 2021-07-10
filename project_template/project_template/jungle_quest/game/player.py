@@ -21,7 +21,7 @@ class Player(arcade.Sprite):
         self.scale = constants.CHARACTER_SCALING
 
         # Load texture pair
-        self.idle_texture_pair = load_texture_pair(constants.PLAYER_IMG)
+        self.idle_texture_pair = load_texture_pair(constants.PLAYER_IMG_TEST)
 
         # set the initial texture
         self.texture = self.idle_texture_pair[1]
