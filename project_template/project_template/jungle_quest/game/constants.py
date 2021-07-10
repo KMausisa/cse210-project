@@ -7,18 +7,20 @@ PATH = os.path.dirname(os.path.abspath(__file__))
 
 #Length and Width of Play screen
 SCREEN_WIDTH = 720
-SCREEN_HEIGHT= 540
+# SCREEN_HEIGHT= 540
+SCREEN_HEIGHT = 700
 SCREEN_TITLE = "Jungle Quest"
 
 #Size of Ground and of Character
-CHARACTER_SCALING = 2
+CHARACTER_SCALING = 1.5
 MAP_SCALING = 2
 TITLE_SCALING = 1
 
 # Player image
 PLAYER_IMG_TEST = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Characters', 'character_0000.png')
+
 # Tiled Map
-MAP_PATH = os.path.join(PATH, '..', 'assets', 'project-map.tmx')
+MAP_PATH = os.path.join(PATH, '..', 'assets', 'project-map-2.tmx')
 
 #Where the Play will Start
 PLAYER_START_X = 64
@@ -37,7 +39,7 @@ LEFT_FACING = 0
 COIN_SCALING = 0.4
 
 #Size of enemy 
-ENEMY_SIZE = 1
+ENEMY_SIZE = 0.5
 
 # Button path
 BUTTON_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0064.png')
@@ -52,10 +54,17 @@ DOOR_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles'
 DOOR_SCALING = 2
 
 # Where the first enemy will start
-ENEMY_START_X = 128
+ENEMY_START_X = 512
 ENEMY_START_Y = 256
 
 # How fast the enemy will move
 ENEMY_MOVEMENT_SPEED = 1
+
+# Viewport
+LEFT_VIEWPORT_MARGIN = 250
+RIGHT_VIEWPORT_MARGIN = 250
+BOTTOM_VIEWPORT_MARGIN = 50
+TOP_VIEWPORT_MARGIN = 100
+
 
 

@@ -14,6 +14,12 @@ class InstructionView(arcade.View):
         ":resources:music/1918.mp3"
         )
 
+        self.coin_image = arcade.load_texture(":resources:images/items/coinGold.png")
+
+        self.door_image = arcade.load_texture(":resources:images/tiles/doorClosed_mid.png")
+
+        self.switch_image = arcade.load_texture(":resources:images/tiles/switchRed_pressed.png")
+
         arcade.play_sound(self.background_music)
 
 
@@ -40,6 +46,19 @@ class InstructionView(arcade.View):
         self.enemy_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-175, 60, 75)
 
         arcade.draw_text("Wandering Enemies. They will kill you!", 500, constants.SCREEN_HEIGHT / 2-210, arcade.color.WHITE, font_size=15, anchor_x="center")
+
+        self.coin_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-250, 90, 75)
+
+        arcade.draw_text("Get the prize to win the game!  Careful! There is a flase Prize!", 585, constants.SCREEN_HEIGHT / 2-260, arcade.color.WHITE, font_size=15, anchor_x="center")
+
+        self.door_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-310, 50, 50)
+
+        arcade.draw_text("This is the door. Hit the switch to get through it.  It can hurt you.", 595, constants.SCREEN_HEIGHT / 2-315, arcade.color.WHITE, font_size=15, anchor_x="center")
+
+        self.switch_image.draw_sized(300, constants.SCREEN_HEIGHT / 2-355, 50, 60)
+
+        arcade.draw_text("Hit this switch to open the door.", 595, constants.SCREEN_HEIGHT / 2-375, arcade.color.WHITE, font_size=15, anchor_x="center")
+
 
         
         

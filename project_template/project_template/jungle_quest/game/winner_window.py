@@ -19,7 +19,7 @@ class WinnerView(arcade.View):
         arcade.start_render()
         # self.texture.draw_sized(constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2,
         #                         constants.SCREEN_WIDTH, constants.SCREEN_HEIGHT)
-        arcade.draw_text("You Won the Game!", constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT / 2, arcade.color.WHITE, font_size=50, anchor_x="center")
+        arcade.draw_text("You Won the Game!", constants.SCREEN_WIDTH / 4, constants.SCREEN_HEIGHT / 2.5, arcade.color.WHITE, font_size=50, anchor_x="center")
 
     def on_mouse_press(self, _x, _y, _button, _modifiers):
         """ If the user presses the mouse button, re-start the game. """

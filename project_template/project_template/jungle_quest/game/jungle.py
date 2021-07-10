@@ -18,6 +18,10 @@ class Jungle(arcade.View):
         self.wall_list = None
         self.background_1_list = None
         self.background_2_list = None
+        self.door_list = None
+        self.door_list_2 = None
+        self.switch_list = None
+        self.switch_list_2 = None
 
         # Lists for Entities
         super().__init__()
@@ -26,6 +30,7 @@ class Jungle(arcade.View):
         self.player_list = None
         self.player_sprite = None
         self.prize_list = None
+        self.prize_fake_list = None
         self.door_list_1 = None
         self.door_list_2 = None
         self.button_list_1 = None
@@ -71,6 +76,10 @@ class Jungle(arcade.View):
         #Call Enemy Class
         self.enemy = Enemy()
 
+        self.view_left = 0
+        self.view_bottom = 0
+        changed_viewport = True
+
         #Sounds
         self.jumping_noise = arcade.load_sound(":resources:sounds/jump2.wav")
 
@@ -88,6 +97,12 @@ class Jungle(arcade.View):
         platforms_layer_name = "Platforms"
         background_1_layer_name = "Background 1"
         background_2_layer_name = "Background 2"
+        door_1_name = "Door 1"
+        door_2_name = "Door 2"
+        switch_1_name = "Switch 1"
+        switch_2_name = "Switch 2"
+        fake_coin_name = "Fake Coin"
+        real_coin_name = "Real Coin"
 
         # Read in tiled map
         my_map = arcade.tilemap.read_tmx(constants.MAP_PATH)
@@ -100,15 +115,35 @@ class Jungle(arcade.View):
                                                       use_spatial_hash=True)
 
         # -- Background --
-        self.background_1_list = arcade.tilemap.process_layer(map_object=my_map,
-                                                            layer_name=background_1_layer_name,
+        self.switch_list = arcade.tilemap.process_layer(map_object=my_map,
+                                                            layer_name=switch_1_name,
+                                                            scaling=constants.MAP_SCALING,
+                                                            use_spatial_hash=True)
+
+        self.switch_list_2 = arcade.tilemap.process_layer(map_object=my_map,
+                                                            layer_name=switch_2_name,
                                                             scaling=constants.MAP_SCALING,
                                                             use_spatial_hash=True)
         
-        self.background_2_list = arcade.tilemap.process_layer(map_object=my_map,
-                                                            layer_name=background_2_layer_name,
+        self.door_list_1 = arcade.tilemap.process_layer(map_object=my_map,
+                                                        layer_name=door_1_name,
+                                                        scaling=constants.MAP_SCALING,
+                                                        use_spatial_hash=True)
+
+        self.door_list_2 = arcade.tilemap.process_layer(map_object=my_map,
+                                                        layer_name=door_2_name,
+                                                        scaling=constants.MAP_SCALING,
+                                                        use_spatial_hash=True)                                                
+
+        self.prize_fake_list = arcade.tilemap.process_layer(map_object=my_map,
+                                                            layer_name=fake_coin_name,
                                                             scaling=constants.MAP_SCALING,
                                                             use_spatial_hash=True)
+
+        self.prize_list = arcade.tilemap.process_layer(map_object=my_map,
+                                                            layer_name=real_coin_name,
+                                                            scaling=constants.MAP_SCALING,
+                                                            use_spatial_hash=True)                                                    
 
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,
                                                              self.wall_list,
@@ -118,22 +153,31 @@ class Jungle(arcade.View):
 
 
         # Add Prize
-        image = ":resources:images/items/coinGold.png"
-        self.prize = arcade.Sprite(image, constants.COIN_SCALING)
-        self.prize.center_x = 690
-        self.prize.center_y = 64
+        # image = ":resources:images/items/coinGold.png"
+        # self.prize = arcade.Sprite(image, constants.COIN_SCALING)
+        # self.prize.center_x = 690
+        # self.prize.center_y = 64
+
+
+        # Add Fake Prize 
+        # self.prize_fake_list = arcade.SpriteList()
+        # image = ":resources:images/items/coinGold.png"
+        # prize = arcade.Sprite(image, constants.COIN_SCALING)
+        # prize.center_x = 500
+        # prize.center_y = 300
+        # self.prize_fake_list.append(prize)
 
 
         # for i in range(2):
-        self.door = arcade.Sprite(constants.DOOR_PATH, constants.DOOR_SCALING)
+        # self.door = arcade.Sprite(constants.DOOR_PATH, constants.DOOR_SCALING)
         #     if self.count != 1:
 
             # Position Door
-        self.door.center_x = 700
-        self.door.center_y = 54
+        # self.door.center_x = 700
+        # self.door.center_y = 54
 
         #         # Add Door 1 to the lists
-        self.door_list_1.append(self.door)
+        # self.door_list_1.append(self.door)
         #         self.count += 1
         #     else:
         #         #Position Door
@@ -190,20 +234,23 @@ class Jungle(arcade.View):
 
         #Draw Sprites
 
-        self.background_1_list.draw()
-        self.background_2_list.draw()
+        # self.background_1_list.draw()
+        # self.background_2_list.draw()
         self.wall_list.draw()
         self.player_list.draw()
+        self.prize_fake_list.draw()
         self.prize_list.draw()
         self.door_list_1.draw()
-        # self.door_list_2.draw()
-        self.button_list_1.draw()
+        self.door_list_2.draw()
+        self.switch_list.draw()
+        self.switch_list_2.draw()
+        # self.button_list_1.draw()
         # self.button_list_2.draw()
-        # self.enemy.enemy_list.draw()
+        self.enemy.enemy_list.draw()
 
         #Draw Lives
         output = f"Lives: {self.lives}"
-        arcade.draw_text(output, 10, 750, arcade.color.WHITE, 25)
+        arcade.draw_text(output, 10, 500, arcade.color.WHITE, 25)
 
         arcade.draw_text(text=f"Player Center X: {self.player_sprite.center_x}",
                          start_x=16,
@@ -221,6 +268,7 @@ class Jungle(arcade.View):
                 # arcade.play_sound(self.jumping_noise)
         elif key == arcade.key.LEFT or key == arcade.key.A:
             self.player_sprite.change_x = (constants.PLAYER_MOVEMENT_SPEED * -1 )
+            self.lives
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.player_sprite.change_x = constants.PLAYER_MOVEMENT_SPEED
 
@@ -242,7 +290,7 @@ class Jungle(arcade.View):
         self.physics_engine_enemy.update()
 
         # enemy sprite will follow the player sprite
-        # self.enemy.follow_sprite(self.player_sprite)
+        self.enemy.follow_sprite(self.player_sprite)
 
         # update player
         self.player_list.update_animation(delta_time)
@@ -250,10 +298,10 @@ class Jungle(arcade.View):
         
         # Checks for collision with enemies
         # if self.player_sprite.collides_with_list(self.enemy.enemy_list):
-            # if self.player_sprite.center_y > (self.enemy.enemy.center_y + 64):
-            #     self.enemy.remove_from_sprite_lists()
-            # elif self.player_sprite.center_y < (self.enemy.enemy.center_y + 64):
-            # arcade.close_window()
+        #     if self.player_sprite.center_y > (self.enemy.enemy.center_y + 64):
+        #         self.enemy.remove_from_sprite_lists()
+        #     elif self.player_sprite.center_y < (self.enemy.enemy.center_y + 64):
+        #     arcade.close_window()
 
 
 
@@ -276,11 +324,17 @@ class Jungle(arcade.View):
             self.player_sprite.center_x = constants.PLAYER_START_X
             self.player_sprite.center_y = constants.PLAYER_START_Y
         
+        # Check if fake coin collides with Player
+        if self.player_sprite.collides_with_list(self.prize_fake_list):
+            self.lives -= 1
+            arcade.play_sound(self.game_over)
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
 
         # self.prize_list.update()
 
         # Generate a list of all sprites that collided with the player.
-        # coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.prize_list)
+        coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.prize_list)
 
         # Loop through each colliding sprite, remove it, and add to the score.
 
@@ -288,6 +342,8 @@ class Jungle(arcade.View):
             coin.remove_from_sprite_lists()
             view = WinnerView()
             self.window.show_view(view)
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
 
         # Generate a list of all sprites that collided with the player.
         if self.player_sprite.collides_with_list(self.door_list_1):
@@ -308,8 +364,8 @@ class Jungle(arcade.View):
             self.window.show_view(view)
 
         # # Generate a list of all sprites that collided with the player.
-        button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_1)
-        # button_2_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.button_list_2)
+        button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.switch_list)
+        button_2_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.switch_list_2)
 
 
 
@@ -319,12 +375,63 @@ class Jungle(arcade.View):
                 arcade.play_sound(self.button_press)
                 door.remove_from_sprite_lists()
 
-            self.prize_list.append(self.prize)
+            # self.prize_list.append(self.prize)
 
-#         elif button_2_hit_list:
-#             for door in self.door_list_2:
-#                 arcade.play_sound(self.button_press)
-#                 door.remove_from_sprite_lists()
+        elif button_2_hit_list:
+            for door in self.door_list_2:
+                arcade.play_sound(self.button_press)
+                door.remove_from_sprite_lists()
+
+                  # Manage Scrolling
+
+        #Track if we need to change viewport
+
+        changed = False
+
+        # Scroll left
+        left_boundary = self.view_left + constants.LEFT_VIEWPORT_MARGIN
+        if self.player_sprite.left < left_boundary:
+            self.view_left -= left_boundary - self.player_sprite.left
+            changed = True
+
+        #Scroll Right
+        right_boundary = self.view_left + constants.SCREEN_WIDTH - constants.RIGHT_VIEWPORT_MARGIN
+        if self.player_sprite.right > right_boundary:
+            self.view_left += self.player_sprite.right - right_boundary
+            changed = True
+
+        #Scroll Up
+        top_boundary = self.view_bottom + constants.SCREEN_HEIGHT - constants.TOP_VIEWPORT_MARGIN
+        if self.player_sprite.top > top_boundary:
+            self.view_bottom += self.player_sprite.top - top_boundary
+            changed = True
+
+        # Scroll down
+        bottom_boundary = self.view_bottom + constants.BOTTOM_VIEWPORT_MARGIN
+        if self.player_sprite.bottom < bottom_boundary:
+            self.view_bottom -= bottom_boundary - self.player_sprite.bottom
+            changed = True
+
+        if changed:
+            #Only scroll to integers. Otherwise we end up with pixels that are not lined up
+            self.view_bottom = int(self.view_bottom)
+            self.view_left = int(self.view_left)
+
+            #Do Scrolling
+            arcade.set_viewport(self.view_left,
+                                constants.SCREEN_WIDTH + self.view_left,
+                                self.view_bottom,
+                                constants.SCREEN_HEIGHT + self.view_bottom)
+
+            # self.lives.change_x = self.view_left
+
+
+
+
+
+
+
+
 
 
 
