@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="18" tileheight="18" infinite="0" nextlayerid="5" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="20" height="15" tilewidth="18" tileheight="18" infinite="0" nextlayerid="6" nextobjectid="1">
  <tileset firstgid="1" name="Tiles" tilewidth="18" tileheight="18" tilecount="180" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -7,6 +7,11 @@
   </tile>
   <tile id="1">
    <image width="18" height="18" source="../../../../../Downloads/kenney_pixelplatformer/Tiles/tile_0001.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="3" x="0" y="0">
+     <polygon points="0,0 18,0 18,18 0,17.75"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="2">
    <image width="18" height="18" source="../../../../../Downloads/kenney_pixelplatformer/Tiles/tile_0002.png"/>
@@ -543,19 +548,19 @@
    <image width="18" height="18" source="../../../../../Downloads/kenney_pixelplatformer/Tiles/tile_0179.png"/>
   </tile>
  </tileset>
- <layer id="1" name="Ground" width="20" height="15">
-  <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALaACYgZqYSZgFiAA48AD0=
-  </data>
- </layer>
- <layer id="4" name="Background" width="20" height="15">
+ <layer id="4" name="Background 1" width="20" height="15">
   <data encoding="base64" compression="zlib">
    eJxjYBgFIwnUDrQDBgEQAmJhIBYB4joqmKcGxOpArEEFs0DACoiTgNiGSuaBQCIZemDhBAsrZNAFpespcRQZAAASJwQ4
   </data>
  </layer>
+ <layer id="5" name="Background 2" width="20" height="15">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2BwAcVR8yiyZ7CbRwkAAFeDASo=
+  </data>
+ </layer>
  <layer id="2" name="Platforms" width="20" height="15">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo4B8wA/EvEAsQEUzFaloFj3MA4UBHwP54YDLfaZkmIVP32AxjxIAAF1GAfQ=
+   eJxjYBgFo4B8wA/EvEAsMNAOGUAACgM+htFwwAaYgJiZSpgFiAHJ4ACj
   </data>
  </layer>
  <layer id="3" name="Objects" width="20" height="15">
