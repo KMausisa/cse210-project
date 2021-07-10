@@ -1,6 +1,6 @@
-# [PROGRAM NAME] 
+# Jungle Quest 
 
-Adventure Game with three challenges
+Jungle Quest is an adventure Game with three challenges!  An Adnventure will make his way through the temple solving unsual challenges left behind by ancient people.  The adventure will have to solve these two challenges to open two seperate doors.  The user will have to solve a music challenge for the first door and then jump on some blocks to get to a button to open the second door that will only be openned for a short amount of time.  The final challenege will be choosing the correct prize.  If the user chooses the correct prize, then he wins the game, if not, he loses.
 
 Challenges idea:
   - two doors with three challenges in between
