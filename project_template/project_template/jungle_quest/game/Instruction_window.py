@@ -10,15 +10,16 @@ class InstructionView(arcade.View):
         """Class constructor. This class loads the textures/images for the window.
         """
         super().__init__()
+        # Load background music
+        self.background_music = arcade.load_sound(":resources:music/1918.mp3")
+        arcade.play_sound(self.background_music)
 
         # Load player image
         self.player_image = arcade.load_texture(constants.PLAYER_IMG_TEST)
 
-         # Load enemy image
+        # Load enemy image
         self.enemy_image = arcade.load_texture(constants.ENEMY_PATH)
 
-        # Load background music
-        self.background_music = arcade.load_sound(":resources:music/1918.mp3")
 
         # Load coin image
         self.coin_image = arcade.load_texture(constants.COIN_PATH)
@@ -29,8 +30,6 @@ class InstructionView(arcade.View):
         # Load switch image
         self.switch_image = arcade.load_texture(constants.SWITCH_PATH)
 
-        # Load background music
-        arcade.play_sound(self.background_music)
 
 
     def on_show(self):
@@ -48,21 +47,21 @@ class InstructionView(arcade.View):
 
         # Display the Name of the game
         arcade.draw_text(text="Jungle Quest", start_x=constants.SCREEN_WIDTH / 2, start_y=(constants.SCREEN_HEIGHT - 150), 
-                         color=arcade.color.WHITE, font_size=50, anchor_x="center")
+                        color=arcade.color.WHITE, font_size=50, anchor_x="center")
         
         # Display the user input to start the game
         arcade.draw_text(text="Click to advance", start_x=constants.SCREEN_WIDTH / 2, start_y=(constants.SCREEN_HEIGHT - 200), 
-                         color=arcade.color.WHITE, font_size=20, anchor_x="center")
+                        color=arcade.color.WHITE, font_size=20, anchor_x="center")
 
         # -- PLAYER --
 
         # Draw the player the user will control
         self.player_image.draw_sized(center_x=250, center_y=(constants.SCREEN_HEIGHT - 300), 
-                                     width=36, height=36)
+                                    width=36, height=36)
 
         # Description of the player
         arcade.draw_text(text="Playable Adventurer", start_x=430, start_y=(constants.SCREEN_HEIGHT - 315), 
-                         color=arcade.color.WHITE, font_size=15, anchor_x="center")
+                        color=arcade.color.WHITE, font_size=15, anchor_x="center")
 
         # -- ENEMY --
 
@@ -72,38 +71,38 @@ class InstructionView(arcade.View):
 
         # Description of the enemy
         arcade.draw_text(text="Wandering Enemies. They will kill you!", start_x=430, start_y=(constants.SCREEN_HEIGHT - 365), 
-                         color=arcade.color.WHITE, font_size=15, anchor_x="center")
+                        color=arcade.color.WHITE, font_size=15, anchor_x="center")
 
         # -- COIN -- 
 
         # Draw the coin the user will have to get 
         self.coin_image.draw_sized(center_x=250, center_y=(constants.SCREEN_HEIGHT - 405), 
-                                   width=36, height=36)
+                                width=36, height=36)
 
         # Description of the coin
         arcade.draw_text(text="Get the prize to win the game!\nCareful! There is a fake prize!", 
-                         start_x=430, start_y=(constants.SCREEN_HEIGHT - 420), 
-                         color=arcade.color.WHITE, font_size=15, 
-                         align="center", anchor_x="center")
+                            start_x=430, start_y=(constants.SCREEN_HEIGHT - 420), 
+                            color=arcade.color.WHITE, font_size=15, 
+                            align="center", anchor_x="center")
 
 
         # -- DOOR --
 
         # Draw the door the user has to open
         self.door_image.draw_sized(center_x=230, center_y=(constants.SCREEN_HEIGHT - 455), 
-                                   width=36, height=36)
+                                    width=36, height=36)
 
         # Description of the door
         arcade.draw_text(text="This is the door. Hit the switch to\nget through it. It can hurt you.", 
-                         start_x=430, start_y=(constants.SCREEN_HEIGHT - 475), 
-                         color=arcade.color.WHITE, font_size=15, 
-                         align="center", anchor_x="center")
+                            start_x=430, start_y=(constants.SCREEN_HEIGHT - 475), 
+                            color=arcade.color.WHITE, font_size=15, 
+                            align="center", anchor_x="center")
 
         # -- SWITCH --
 
         # Draw the switch the user has to use to open
         self.switch_image.draw_sized(center_x=280, center_y=(constants.SCREEN_HEIGHT - 455), 
-                                     width=36, height=36)
+                                        width=36, height=36)
 
 
         
