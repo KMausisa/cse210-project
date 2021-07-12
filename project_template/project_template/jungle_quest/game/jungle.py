@@ -51,6 +51,7 @@ class Jungle(arcade.View):
         #Our Physics Engine
         self.physics_engine = None
         self.physics_engine_enemy = None
+        self.physics_engine_enemy_2 = None
         # self.physics_engine_door_1 = None
 
         arcade.set_background_color(arcade.csscolor.SKY_BLUE)
@@ -82,6 +83,12 @@ class Jungle(arcade.View):
         self.enemy.center_x = constants.ENEMY_START_X
         self.enemy.center_y = constants.ENEMY_START_Y
         self.enemy_list.append(self.enemy)
+
+        self.enemy_2 = Enemy()
+        self.enemy_2.center_x = constants.ENEMY_START_X + 300
+        self.enemy_2.center_y = constants.ENEMY_START_Y
+        self.enemy_list.append(self.enemy_2)
+
 
         self.view_left = 0
         self.view_bottom = 0
@@ -226,6 +233,7 @@ class Jungle(arcade.View):
         
         self.physics_engine_player = arcade.PhysicsEnginePlatformer(self.player_sprite,self.wall_list,constants.GRAVITY)
         self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy,self.wall_list,constants.GRAVITY)
+        self.physics_engine_enemy_2 = arcade.PhysicsEnginePlatformer(self.enemy_2,self.wall_list,constants.GRAVITY)
         # self.physics_engine_door_1 = arcade.PhysicsEnginePlatformer(self.player_sprite,self.door_list_2,constants.GRAVITY)
 
         
@@ -290,9 +298,11 @@ class Jungle(arcade.View):
         # Move the player with the physics engine
         self.physics_engine_player.update()
         self.physics_engine_enemy.update()
+        self.physics_engine_enemy_2.update()
 
         # enemy sprite will follow the player sprite
         self.enemy.follow_sprite(self.player_sprite)
+        self.enemy_2.follow_sprite(self.player_sprite)
 
         # update player
         self.player_list.update_animation(delta_time)
