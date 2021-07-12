@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="18" tileheight="18" infinite="0" nextlayerid="8" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="18" tileheight="18" infinite="0" nextlayerid="9" nextobjectid="1">
  <tileset firstgid="1" name="Tiles" tilewidth="18" tileheight="18" tilecount="180" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -543,9 +543,14 @@
    <image width="18" height="18" source="kenney_pixelplatformer/Tiles/tile_0179.png"/>
   </tile>
  </tileset>
+ <layer id="8" name="Background1" width="100" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt1MsJwCAQQEFbsYgUkf4byjkB82F3EwkzF8HDKj6wNQAAAAAAAIA8y9cXYEePuegxl6seer1Lj5iePE+PmKoeo7l6nMvu0Q9r9Xl/k/1uesRk/yt6xKwP9+/Oy54L1TbirQX6
+  </data>
+ </layer>
  <layer id="1" name="Platforms" width="100" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwjAQheFi19YuPYbW+9/NBCqIpJh0ZtJJ838wuPIRfWPqMAAAAAAAAKAVj0azz4o+fKEPX3rsQ/Nc2p+RPvxkWeTVypaw6uMWZlrnur7OgjxtvfWhnffdb0m3W++jj+PzamVLHNnHZ3fjfZbad/rwk2WRVytb4vdccWe39rU0Syo3b8+zpZU+LLL+3UuleRp66EMbfaTl7PczzBLmpXSuKHWXlv7fzc32gue5L2foY8/vhj588XrWS5ixw7lrfHkG3r1AD1k=
+   eJztl1sKwyAQRUP73bSfXUYfq+j+N1SFCEUMVWdMxngODIE8LiZHRzJNAAAAAAAAAADQC49Os48KPmyBD1uM6ENzXNrviA87WS3ytsqW0MrH1dW81GU53gR52ozmQzvP+w1eS9yuPYeP/fO2ypawp4/Q0/z8Tc13fNjJapG3VbaEeFyh35buvaksKbl5NXtLLz5aZP3rS6V5GozgQxt8pMmZ309XL1dvpXF5Ur20Zp3lZFthlP389/90VszV5gg+atYN60POJzrG11Ln1+636uPk6jxg3TU+XgO+EKQQyg==
   </data>
  </layer>
  <layer id="2" name="Door 1" width="100" height="30">

@@ -255,7 +255,7 @@ class Jungle(arcade.View):
         output = f"Lives: {self.lives}"
         arcade.draw_text(output, 
                         start_x=10 + self.view_left, 
-                        start_y= 10 + self.view_bottom, 
+                        start_y=10 + self.view_bottom, 
                         color=arcade.csscolor.WHITE, 
                         font_size=18)
 
