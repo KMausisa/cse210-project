@@ -60,8 +60,8 @@ class Jungle(arcade.View):
         """Sets up the charcter,walls, and primitive sound. """
 
         
-        self.game_over = arcade.load_sound(":resources:sounds/gameover3.wav")
-        self.button_press = arcade.load_sound(":resources:sounds/secret2.wav")
+        self.game_over = arcade.load_sound(constants.GAMEOVER_PATH)
+        self.button_press = arcade.load_sound(constants.SECRET_PATH)
 
         self.player_list = arcade.SpriteList()
         self.enemy_list = arcade.SpriteList()
@@ -96,7 +96,7 @@ class Jungle(arcade.View):
         changed_viewport = True
 
         #Sounds
-        self.jumping_noise = arcade.load_sound(":resources:sounds/jump2.wav")
+        self.jumping_noise = arcade.load_sound(constants.JUMPING_PATH)
 
 
         # self.player_list = self.player.create_player(self.player_list, self.player_sprite)
@@ -114,7 +114,7 @@ class Jungle(arcade.View):
         background_2_layer_name = "Background 2"
         door_1_name = "Door 1"
         door_2_name = "Door 2"
-        door_3_name = "Door 3"
+        door_3_name = "Trap Doors"
         switch_1_name = "Switch 1"
         switch_2_name = "Switch 2"
         switch_3_name = "Switch 3"

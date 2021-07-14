@@ -89,4 +89,12 @@ BOTTOM_VIEWPORT_MARGIN = 50
 TOP_VIEWPORT_MARGIN = 100
 
 
+# Sound Paths
+JUMPING_PATH = os.path.join(PATH, '..', 'assets', 'sounds', 'jump2.wav')
+GAMEOVER_PATH = os.path.join(PATH, '..', 'assets', 'sounds', 'gameover3.wav')
+SECRET_PATH = os.path.join(PATH, '..', 'assets', 'sounds', 'secret2.wav')
+MUSIC_PATH = os.path.join(PATH, '..', 'assets', 'sounds', '1918.mp3')
+
+
+
 

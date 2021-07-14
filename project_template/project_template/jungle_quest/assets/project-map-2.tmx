@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="18" tileheight="18" infinite="0" nextlayerid="9" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="100" height="30" tilewidth="18" tileheight="18" infinite="0" nextlayerid="12" nextobjectid="1">
  <tileset firstgid="1" name="Tiles" tilewidth="18" tileheight="18" tilecount="180" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
@@ -545,12 +545,17 @@
  </tileset>
  <layer id="8" name="Background1" width="100" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1MsJwCAQQEFbsYgUkf4byjkB82F3EwkzF8HDKj6wNQAAAAAAAIA8y9cXYEePuegxl6seer1Lj5iePE+PmKoeo7l6nMvu0Q9r9Xl/k/1uesRk/yt6xKwP9+/Oy54L1TbirQX6
+   eJzt1kEKwjAQheGcQb1AN+oF3KgX6DXUKygu1aVe2oE2EEO1o53GtPwfPFKsmQYfBZ0DAAAAAAAAAAAAADurfx8AL6z6KBLvGyv6yEtbH9q+6MNGyj4mkmmQmXJfzqzPn6IPf28uWQRZtuwbgr76eDdX20cZXF+je372WrKR7Op1++G5Q2F9/iJa+3ien7GXHCSn6vrSND/uMnfWv5t1H03f9+/OrV4fkrOrOhnr+/Hr/9YUfcSOHebnpvzyc+08q7maOfcO8wHvCYSYEtM=
+  </data>
+ </layer>
+ <layer id="11" name="Background 2" width="100" height="30">
+  <data encoding="base64" compression="zlib">
+   eJzt0cEJACAMBMFUZxEWYf9PawgSOGHmud+tAgAAAHizmp1Zu9mZ5UcWP7L4kcWPLH5k8SPLaXYAAAAA/nIBbMkGVQ==
   </data>
  </layer>
  <layer id="1" name="Platforms" width="100" height="30">
   <data encoding="base64" compression="zlib">
-   eJztl1sKwyAQRUP73bSfXUYfq+j+N1SFCEUMVWdMxngODIE8LiZHRzJNAAAAAAAAAADQC49Os48KPmyBD1uM6ENzXNrviA87WS3ytsqW0MrH1dW81GU53gR52ozmQzvP+w1eS9yuPYeP/fO2ypawp4/Q0/z8Tc13fNjJapG3VbaEeFyh35buvaksKbl5NXtLLz5aZP3rS6V5GozgQxt8pMmZ309XL1dvpXF5Ur20Zp3lZFthlP389/90VszV5gg+atYN60POJzrG11Ln1+636uPk6jxg3TU+XgO+EKQQyg==
+   eJzt2FsKwjAQheFBn60+ugwvG3JPbsil2dEGiiSatEkYk/+DQVB6wJykRUUAAAAAAADCriK3f8xu1aXgmpXMbhV92EIftvTYx8lolqIPO1mKPvJl7ccZptlNr4fEPPqwk6V0ze4iDx3t1/XqunWf6bhr5u99u44+0nE+6ma5e5ruX9+9jD7sZCn6eO/Z0H5NzVords18z4hc2bXVOB+/7kshnA9b6MMvZn+f5fUd9X/sbD7XbOk5i8m2opfn+fz36ZA5O6cW+lhybujDFqt9bMbZdjjHHItXwBO+1CtX
   </data>
  </layer>
  <layer id="2" name="Door 1" width="100" height="30">
@@ -563,6 +568,11 @@
    eJztzjEBAAAIwKB1t7gxPIQEFAAAAAAAAAAAAABAzXWA9xZ4ewCE
   </data>
  </layer>
+ <layer id="10" name="Trap Doors" width="100" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJAEAIBLHt/21BV5rYg3AICcx/EgAAAAAAAIBbKnnT7w8AAAAAdjXikQKp
+  </data>
+ </layer>
  <layer id="4" name="Switch 1" width="100" height="30">
   <data encoding="base64" compression="zlib">
    eJztzkERAAAIA6BVs38pU+z0AQlIAAAAAAAAAAD+m+sAAAAAdQu8CQBC
@@ -571,6 +581,11 @@
  <layer id="5" name="Switch 2" width="100" height="30">
   <data encoding="base64" compression="zlib">
    eJztzjENAAAIA7BZw78pLOwjIa2CJgAAAAAAALTmOgAAAAAA8NgCpa8AQg==
+  </data>
+ </layer>
+ <layer id="9" name="Switch 3" width="100" height="30">
+  <data encoding="base64" compression="zlib">
+   eJztzgEJAAAIA7BXs38pUxwRtgRLAAAAAAAAAAAAgG/mOgAABQvtzwBC
   </data>
  </layer>
  <layer id="6" name="Fake Coin" width="100" height="30">

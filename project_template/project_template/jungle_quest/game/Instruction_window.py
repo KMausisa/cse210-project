@@ -11,7 +11,7 @@ class InstructionView(arcade.View):
         """
         super().__init__()
         # Load background music
-        self.background_music = arcade.load_sound(":resources:music/1918.mp3")
+        self.background_music = arcade.load_sound(constants.MUSIC_PATH)
         arcade.play_sound(self.background_music)
 
         # Load player image
