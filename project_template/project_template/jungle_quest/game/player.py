@@ -26,19 +26,19 @@ class Player(arcade.Sprite):
         # set the initial texture
         self.texture = self.idle_texture_pair[self.character_face_direction]
 
-        def update_animation(self, delta_time: float = 1/60):
-            """Creating character animation
+    def update_animation(self, delta_time: float = 1/60):
+        """Creating character animation
 
-            Args:
-                self (Player): An instance of Player.
-                delta_time (float): The time it takes to update the Player image
-            """
-            # Figure out if we need to flip face left or right
-            if self.change_x < 0 and self.character_face_direction == constants.RIGHT_FACING:
-                self.character_face_direction = constants.LEFT_FACING
-            elif self.change_x > 0 and self.character_face_direction == constants.LEFT_FACING:
-                self.character_face_direction = constants.RIGHT_FACING
+        Args:
+            self (Player): An instance of Player.
+            delta_time (float): The time it takes to update the Player image
+        """
+        # Figure out if we need to flip face left or right
+        if self.change_x < 0 and self.character_face_direction == constants.RIGHT_FACING:
+            self.character_face_direction = constants.LEFT_FACING
+        elif self.change_x > 0 and self.character_face_direction == constants.LEFT_FACING:
+            self.character_face_direction = constants.RIGHT_FACING
             
-            # self.texture = self.idle_texture_pair[self.character_face_direction]
+        self.texture = self.idle_texture_pair[self.character_face_direction]
 
             

@@ -13,13 +13,18 @@ class Enemy(arcade.Sprite):
         """
         super().__init__()
         
+        # Default to face right
+        self.character_face_direction = constants.LEFT_FACING
+
+        # Used for flipping between image sequences
+        self.cur_texture = 0
         self.scale = constants.ENEMY_SIZE
         
         # Load texture pair
         self.idle_texture_pair = load_texture_pair(constants.ENEMY_PATH)
 
         # set the initial texture
-        self.texture = self.idle_texture_pair[0]
+        self.texture = self.idle_texture_pair[self.character_face_direction]
         
 
     def follow_sprite(self, player_sprite):
@@ -32,10 +37,30 @@ class Enemy(arcade.Sprite):
         """
 
         if self.center_x < player_sprite.center_x:
-            self.center_x += min(constants.ENEMY_MOVEMENT_SPEED, player_sprite.center_x - self.center_x)
-            # self.enemy.cur_texture_index = 0
+            # self.center_x += min(constants.ENEMY_MOVEMENT_SPEED, player_sprite.center_x - self.center_x)
+            self.change_x = constants.ENEMY_MOVEMENT_SPEED
         elif self.center_x > player_sprite.center_x:
-            self.center_x -= min(constants.ENEMY_MOVEMENT_SPEED, self.center_x - player_sprite.center_x)
-            # self.enemy.cur_texture_index = 1
+            # self.center_x -= min(constants.ENEMY_MOVEMENT_SPEED, self.center_x - player_sprite.center_x)
+            self.change_x = constants.ENEMY_MOVEMENT_SPEED * -1
+        
+        elif self.center_x == player_sprite.center_x:
+            self.change_x = 0
+
+            
+    
+    def update_animation(self, delta_time: float = 1/60):
+        """Creating character animation
+
+        Args:
+            self (Player): An instance of Player.
+            delta_time (float): The time it takes to update the Player image
+        """
+        # Figure out if we need to flip face left or right
+        if self.change_x < 0 and self.character_face_direction == constants.RIGHT_FACING:
+            self.character_face_direction = constants.LEFT_FACING
+        elif self.change_x > 0 and self.character_face_direction == constants.LEFT_FACING:
+            self.character_face_direction = constants.RIGHT_FACING
+            
+        self.texture = self.idle_texture_pair[self.character_face_direction]
 
     

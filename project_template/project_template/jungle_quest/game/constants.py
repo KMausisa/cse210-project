@@ -58,6 +58,7 @@ ENEMY_MOVEMENT_SPEED = 1
 
 # Button path
 BUTTON_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0064.png')
+BUTTON_PATH_2 = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0064.png')
 
 #Button Size
 BUTTON_SCALING = 2
@@ -81,6 +82,13 @@ SWITCH_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tile
 
 # Coin Path
 COIN_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0151.png')
+
+
+# -- Lives --
+
+# Heart Path
+HEART_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0044.png')
+EMPTY_HEART_PATH = os.path.join(PATH, '..', 'assets', 'kenney_pixelplatformer', 'Tiles', 'tile_0046.png')
 
 # Viewport
 LEFT_VIEWPORT_MARGIN = 250

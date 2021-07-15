@@ -545,17 +545,17 @@
  </tileset>
  <layer id="8" name="Background1" width="100" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1kEKwjAQheGcQb1AN+oF3KgX6DXUKygu1aVe2oE2EEO1o53GtPwfPFKsmQYfBZ0DAAAAAAAAAAAAADurfx8AL6z6KBLvGyv6yEtbH9q+6MNGyj4mkmmQmXJfzqzPn6IPf28uWQRZtuwbgr76eDdX20cZXF+je372WrKR7Op1++G5Q2F9/iJa+3ien7GXHCSn6vrSND/uMnfWv5t1H03f9+/OrV4fkrOrOhnr+/Hr/9YUfcSOHebnpvzyc+08q7maOfcO8wHvCYSYEtM=
+   eJztmE1OwzAQhecMtBfoAsoFWLRl0RVSr8CSsmJfQIJFYVeQQGIJOUyOxiTY0sjEsRO7dZK+T3py5MQ/neexrRIBAAAAAAAAAAAAxCEjyn8qxPXL1HPrA98cJx0zfs73PV42IH/2+VukLy5vDu1hasycD42/jt8xxC4lmed6BgCAY+Qr9QQGxEXqCQyEE9ZIaNyyn674cZV6AoGcsaZC5x5tHpXWRFtdF+LHiOKsiYLrgLapeBXPc9aCdaPKy5Z9uvyoez+l5mti6GzEc5tz9ZB+xNpjuwjvOXTLuv8rt8U+9CD2IV9C/JD56ZOjbfbYvsCxL8+CHesloB8d74njvQ21Hkrpc8k2n1h7bJfZuD+pZWKUtvcxxpc5vbbkcsjaSoXOjeK37SzfnHr2FerHO/2/s9nQ95EmbfpG1fosvJhV1D8pPYs60w995o6N+ibjuwjN6ZTcqVLeTeS95K2izYz8/ViJshjDPGtXVI8en8+CfCE0r/lvWbf5IFp+8nemHEMCUPILtJlnAQ==
   </data>
  </layer>
  <layer id="11" name="Background 2" width="100" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt0cEJACAMBMFUZxEWYf9PawgSOGHmud+tAgAAAHizmp1Zu9mZ5UcWP7L4kcWPLH5k8SPLaXYAAAAA/nIBbMkGVQ==
+   eJztmLsOgjAYhXkFLxuTD+GizhoX4+TgZVDcTBzdUHT0qf0ba0Rpa3+gpML5kpOS02t6oE0IAgAAAAAAAAAAAIBijJk+cMuS6QO3IA+/QB5+gTz8AnnYcatoHuThF8jDL45MH/xGnG0Hi3b9nOP3cvarAzPSPGffFWkttVHUIw+3cP9p6PKISYl8vijqkUeWq8Lj3rlN/T506y9yFpWBKQ9TXV3ycLH/E43fJnVS6iraTA3jNiGPKhmQhqSdLEfM/nXPoyX17bsiIu1Jp2eZRO8rOoNqHaZvpw55cHxBWNLcW4s23P399zzS79pF4wsWsgyDzzzSd4HqHhD9zpq578z1cf3YYnwAXjwA5JgcbA==
   </data>
  </layer>
  <layer id="1" name="Platforms" width="100" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt2FsKwjAQheFBn60+ugwvG3JPbsil2dEGiiSatEkYk/+DQVB6wJykRUUAAAAAAADCriK3f8xu1aXgmpXMbhV92EIftvTYx8lolqIPO1mKPvJl7ccZptlNr4fEPPqwk6V0ze4iDx3t1/XqunWf6bhr5u99u44+0nE+6ma5e5ruX9+9jD7sZCn6eO/Z0H5NzVords18z4hc2bXVOB+/7kshnA9b6MMvZn+f5fUd9X/sbD7XbOk5i8m2opfn+fz36ZA5O6cW+lhybujDFqt9bMbZdjjHHItXwBO+1CtX
+   eJztmGEKgkAQhZf6nfUzCLpDdYA6SnfqQh2tnXJAYmvNfTs75PtgEBQ/Bp/OqiEQQgghhBBCCCGkNacQrh5dNXxW7hKOwL6Qrho+K3cJzMMXzMMXzMMXzMMXFnnswD4Ec8tjHavra9VvNw17s3SX4H1e3UK4S0m+mqtmq8ek9Jzhvm/nMY/2Pit3CS3z0Jkm929qljEPP64avn1FN4r3vnTe/rr2plyljPWl1giU2xqL5+PTXMq9B3Ne+YJ5pMmtu8Lh5ZL/2DBSszTXx1S3F9Dz6hy3UheQD6B5Mvw+7cBuJP/wfjXluWEevvDa6yLWcoa1RVy8CjwALAw8Ew==
   </data>
  </layer>
  <layer id="2" name="Door 1" width="100" height="30">

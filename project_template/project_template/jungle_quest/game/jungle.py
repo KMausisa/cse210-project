@@ -14,6 +14,9 @@ class Jungle(arcade.View):
 
     def __init__(self):
 
+        # Lists for Entities
+        super().__init__()
+
         # Lists for Map Layers
         self.wall_list = None
         self.background_1_list = None
@@ -22,9 +25,6 @@ class Jungle(arcade.View):
         self.door_list_2 = None
         self.switch_list = None
         self.switch_list_2 = None
-
-        # Lists for Entities
-        super().__init__()
         
 
         self.player_list = None
@@ -40,6 +40,7 @@ class Jungle(arcade.View):
         self.button_list_1 = None
         self.button_list_2 = None
         
+        # Sets the mouse to be invisible when on the Window
         self.window.set_mouse_visible(False)
         
         #Number of times you hit a door
@@ -49,9 +50,11 @@ class Jungle(arcade.View):
         self.lives = 3
 
         #Our Physics Engine
-        self.physics_engine = None
+        self.physics_engine_player = None
+        self.physics_engine__player_2 = None
         self.physics_engine_enemy = None
         self.physics_engine_enemy_2 = None
+        self.physics_engine_enemy_3 = None
 
 
         arcade.set_background_color(arcade.csscolor.SKY_BLUE)
@@ -59,6 +62,10 @@ class Jungle(arcade.View):
     def setup(self):
         """Sets up the charcter,walls, and primitive sound. """
 
+        # Viewport
+        self.view_left = 0
+        self.view_bottom = 0
+        changed_viewport = True
         
         self.game_over = arcade.load_sound(constants.GAMEOVER_PATH)
         self.button_press = arcade.load_sound(constants.SECRET_PATH)
@@ -72,36 +79,25 @@ class Jungle(arcade.View):
         self.button_list_1 = arcade.SpriteList()
         self.button_list_2 = arcade.SpriteList()
         
-        #Call Enemy Class
+        # Call Enemy Class
         self.enemy = Enemy()
         self.enemy.center_x = constants.ENEMY_START_X
         self.enemy.center_y = constants.ENEMY_START_Y
         self.enemy_list.append(self.enemy)
 
         self.enemy_2 = Enemy()
-        self.enemy_2.center_x = constants.ENEMY_START_X + 300
+        self.enemy_2.center_x = constants.ENEMY_START_X + 500
         self.enemy_2.center_y = constants.ENEMY_START_Y
         self.enemy_list.append(self.enemy_2)
 
         self.enemy_3 = Enemy()
         self.enemy_3.center_x = constants.ENEMY_START_X + 1300
-        self.enemy_3.center_y = constants.ENEMY_START_Y +600
+        self.enemy_3.center_y = constants.ENEMY_START_Y + 600
         self.enemy_list.append(self.enemy_3)
-
-        
-
-
-        self.view_left = 0
-        self.view_bottom = 0
-        changed_viewport = True
 
         #Sounds
         self.jumping_noise = arcade.load_sound(constants.JUMPING_PATH)
 
-
-        # self.player_list = self.player.create_player(self.player_list, self.player_sprite)
-
-        image = ":resources:images/animated_characters/male_adventurer/maleAdventurer_idle.png"
         self.player_sprite = Player()
         self.player_sprite.center_x = constants.PLAYER_START_X
         self.player_sprite.center_y = constants.PLAYER_START_Y
@@ -110,7 +106,7 @@ class Jungle(arcade.View):
 
         # Name of the layer in the file that has our platforms/walls
         platforms_layer_name = "Platforms"
-        background_1_layer_name = "Background 1"
+        background_1_layer_name = "Background1"
         background_2_layer_name = "Background 2"
         door_1_name = "Door 1"
         door_2_name = "Door 2"
@@ -124,14 +120,23 @@ class Jungle(arcade.View):
         # Read in tiled map
         my_map = arcade.tilemap.read_tmx(constants.MAP_PATH)
 
+        # -- Background --
+        self.background_1_list = arcade.tilemap.process_layer(map_object=my_map,
+                                                            layer_name=background_1_layer_name,
+                                                            scaling=constants.MAP_SCALING,
+                                                            use_spatial_hash=True)
 
+        self.background_2_list = arcade.tilemap.process_layer(map_object=my_map,
+                                                            layer_name=background_2_layer_name,
+                                                            scaling=constants.MAP_SCALING,
+                                                            use_spatial_hash=True)
         # -- Platforms --
         self.wall_list = arcade.tilemap.process_layer(map_object=my_map,
                                                         layer_name=platforms_layer_name,
                                                         scaling=constants.MAP_SCALING,
                                                         use_spatial_hash=True)
 
-        # -- Background --
+
         self.switch_list = arcade.tilemap.process_layer(map_object=my_map,
                                                             layer_name=switch_1_name,
                                                             scaling=constants.MAP_SCALING,
@@ -156,6 +161,7 @@ class Jungle(arcade.View):
                                                         layer_name=door_2_name,
                                                         scaling=constants.MAP_SCALING,
                                                         use_spatial_hash=True)
+                                                        
         self.door_list_3 = arcade.tilemap.process_layer(map_object=my_map,
                                                         layer_name=door_3_name,
                                                         scaling=constants.MAP_SCALING,
@@ -170,7 +176,6 @@ class Jungle(arcade.View):
                                                             layer_name=real_coin_name,
                                                             scaling=constants.MAP_SCALING,
                                                             use_spatial_hash=True)                                                    
-
 
         # Add Button 1
         self.button = arcade.Sprite(constants.BUTTON_PATH, constants.BUTTON_SCALING)
@@ -187,6 +192,7 @@ class Jungle(arcade.View):
         self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy,self.wall_list,constants.GRAVITY)
         self.physics_engine_enemy_2 = arcade.PhysicsEnginePlatformer(self.enemy_2,self.wall_list,constants.GRAVITY)
         self.physics_engine_enemy_3 = arcade.PhysicsEnginePlatformer(self.enemy_3,self.wall_list,constants.GRAVITY)
+        self.physics_engine_enemy_4 = arcade.PhysicsEnginePlatformer(self.enemy_3,self.door_list_3, constants.GRAVITY)
         
         # self.physics_engine_door_1 = arcade.PhysicsEnginePlatformer(self.player_sprite,self.door_list_2,constants.GRAVITY)
 
@@ -199,7 +205,8 @@ class Jungle(arcade.View):
 
         #Draw Sprites
 
-
+        self.background_1_list.draw()
+        self.background_2_list.draw()
         self.wall_list.draw()
         self.player_list.draw()
         self.prize_fake_list.draw()
@@ -216,8 +223,8 @@ class Jungle(arcade.View):
         output = f"Lives: {self.lives}"
         arcade.draw_text(output, 
                         start_x=10 + self.view_left, 
-                        start_y=10 + self.view_bottom, 
-                        color=arcade.csscolor.WHITE, 
+                        start_y=500 + self.view_bottom, 
+                        color=arcade.csscolor.BLACK, 
                         font_size=18)
 
     def on_key_press(self, key, modifiers):
@@ -256,22 +263,18 @@ class Jungle(arcade.View):
         
 
         # enemy sprite will follow the player sprite
-        self.enemy.follow_sprite(self.player_sprite)
-        self.enemy_2.follow_sprite(self.player_sprite)
-        self.enemy_3.follow_sprite(self.player_sprite)
+        for enemy in self.enemy_list:
+            enemy.follow_sprite(self.player_sprite)
         
 
         # update player
-        self.player_sprite.update_animation(delta_time)
-
-
-
-
+        self.player_list.update_animation(delta_time)
+        
+        # Update enemy animation
+        self.enemy_list.update_animation(delta_time)
 
         #Move Enemy with physics engine
         self.physics_engine_enemy.update()
-
-
 
         #Check if Enemy collides with Player
 
@@ -321,7 +324,9 @@ class Jungle(arcade.View):
 
 
         if self.lives == 0:
-    
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
+        
             view = GameOverView()
             self.window.show_view(view)
 
