@@ -26,9 +26,3 @@ class GameOverView(arcade.View):
         game_view = GameView()
         game_view.setup()
         self.window.show_view(game_view)
-
-# def main():
-#     """ Main method """
-#     window = arcade.Window(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
-#     start_view = InstructionView()
-#     window.show_view

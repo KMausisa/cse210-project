@@ -92,7 +92,7 @@ class Jungle(arcade.View):
 
         self.enemy_3 = Enemy()
         self.enemy_3.center_x = constants.ENEMY_START_X + 1300
-        self.enemy_3.center_y = constants.ENEMY_START_Y + 600
+        self.enemy_3.center_y = constants.ENEMY_START_Y + 100
         self.enemy_list.append(self.enemy_3)
 
         #Sounds
@@ -192,9 +192,6 @@ class Jungle(arcade.View):
         self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy,self.wall_list,constants.GRAVITY)
         self.physics_engine_enemy_2 = arcade.PhysicsEnginePlatformer(self.enemy_2,self.wall_list,constants.GRAVITY)
         self.physics_engine_enemy_3 = arcade.PhysicsEnginePlatformer(self.enemy_3,self.wall_list,constants.GRAVITY)
-        self.physics_engine_enemy_4 = arcade.PhysicsEnginePlatformer(self.enemy_3,self.door_list_3, constants.GRAVITY)
-        
-        # self.physics_engine_door_1 = arcade.PhysicsEnginePlatformer(self.player_sprite,self.door_list_2,constants.GRAVITY)
 
         
 
@@ -324,8 +321,7 @@ class Jungle(arcade.View):
 
 
         if self.lives == 0:
-            self.player_sprite.center_x = constants.PLAYER_START_X
-            self.player_sprite.center_y = constants.PLAYER_START_Y
+            self.player_list.remove(self.player_sprite)
         
             view = GameOverView()
             self.window.show_view(view)
