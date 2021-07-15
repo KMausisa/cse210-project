@@ -90,10 +90,10 @@ class Jungle(arcade.View):
         self.enemy_2.center_y = constants.ENEMY_START_Y
         self.enemy_list.append(self.enemy_2)
 
-        self.enemy_3 = Enemy()
-        self.enemy_3.center_x = constants.ENEMY_START_X + 1300
-        self.enemy_3.center_y = constants.ENEMY_START_Y + 100
-        self.enemy_list.append(self.enemy_3)
+        # self.enemy_3 = Enemy()
+        # self.enemy_3.center_x = constants.ENEMY_START_X + 1300
+        # self.enemy_3.center_y = constants.ENEMY_START_Y + 100
+        # self.enemy_list.append(self.enemy_3)
 
         #Sounds
         self.jumping_noise = arcade.load_sound(constants.JUMPING_PATH)
@@ -177,11 +177,6 @@ class Jungle(arcade.View):
                                                             scaling=constants.MAP_SCALING,
                                                             use_spatial_hash=True)                                                    
 
-        # Add Button 1
-        self.button = arcade.Sprite(constants.BUTTON_PATH, constants.BUTTON_SCALING)
-        self.button.center_x = 196
-        self.button.center_y = 305
-        self.button_list_1.append(self.button)
 
 
 
@@ -191,7 +186,7 @@ class Jungle(arcade.View):
         self.physics_engine_player = arcade.PhysicsEnginePlatformer(self.player_sprite,self.wall_list,constants.GRAVITY)
         self.physics_engine_enemy = arcade.PhysicsEnginePlatformer(self.enemy,self.wall_list,constants.GRAVITY)
         self.physics_engine_enemy_2 = arcade.PhysicsEnginePlatformer(self.enemy_2,self.wall_list,constants.GRAVITY)
-        self.physics_engine_enemy_3 = arcade.PhysicsEnginePlatformer(self.enemy_3,self.wall_list,constants.GRAVITY)
+        # self.physics_engine_enemy_3 = arcade.PhysicsEnginePlatformer(self.enemy_3,self.wall_list,constants.GRAVITY)
 
         
 
@@ -252,26 +247,6 @@ class Jungle(arcade.View):
     def on_update(self, delta_time):
         """Movement and game logic"""
 
-        # Move the player with the physics engine
-        self.physics_engine_player.update()
-        self.physics_engine_enemy.update()
-        self.physics_engine_enemy_2.update()
-        self.physics_engine_enemy_3.update()
-        
-
-        # enemy sprite will follow the player sprite
-        for enemy in self.enemy_list:
-            enemy.follow_sprite(self.player_sprite)
-        
-
-        # update player
-        self.player_list.update_animation(delta_time)
-        
-        # Update enemy animation
-        self.enemy_list.update_animation(delta_time)
-
-        #Move Enemy with physics engine
-        self.physics_engine_enemy.update()
 
         #Check if Enemy collides with Player
 
@@ -288,19 +263,10 @@ class Jungle(arcade.View):
             self.player_sprite.center_x = constants.PLAYER_START_X
             self.player_sprite.center_y = constants.PLAYER_START_Y
 
-        # self.prize_list.update()
 
-        # Generate a list of all sprites that collided with the player.
-        coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.prize_list)
 
         # Loop through each colliding sprite, remove it, and add to the score.
 
-        for coin in coins_hit_list:
-            coin.remove_from_sprite_lists()
-            view = WinnerView()
-            self.window.show_view(view)
-            self.player_sprite.center_x = constants.PLAYER_START_X
-            self.player_sprite.center_y = constants.PLAYER_START_Y
 
         # Generate a list of all sprites that collided with the player.
         if self.player_sprite.collides_with_list(self.door_list_1):
@@ -320,9 +286,7 @@ class Jungle(arcade.View):
             self.player_sprite.center_y = constants.PLAYER_START_Y
 
 
-        if self.lives == 0:
-            view = GameOverView()
-            self.window.show_view(view)
+        
 
         # # Generate a list of all sprites that collided with the player.
         button_1_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.switch_list)
@@ -391,18 +355,35 @@ class Jungle(arcade.View):
                                 self.view_bottom,
                                 constants.SCREEN_HEIGHT + self.view_bottom)
 
-            # self.lives.change_x = self.view_left
+        coins_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.prize_list)
 
+        for coin in coins_hit_list:
+            coin.remove_from_sprite_lists()
+            view = WinnerView()
+            self.window.show_view(view)
+            self.player_sprite.center_x = constants.PLAYER_START_X
+            self.player_sprite.center_y = constants.PLAYER_START_Y
 
+        if self.lives == 0:
+            view = GameOverView()
+            self.window.show_view(view)
 
-
-
-
-
-
-
-
-
+        self.physics_engine_player.update()
+        self.physics_engine_enemy.update()
+        self.physics_engine_enemy_2.update()
+        # self.physics_engine_enemy_3.update()
         
 
+        # enemy sprite will follow the player sprite
+        for enemy in self.enemy_list:
+            enemy.follow_sprite(self.player_sprite)
+        
 
+        # update player
+        self.player_list.update_animation(delta_time)
+        
+        # Update enemy animation
+        self.enemy_list.update_animation(delta_time)
+
+        #Move Enemy with physics engine
+        self.physics_engine_enemy.update()

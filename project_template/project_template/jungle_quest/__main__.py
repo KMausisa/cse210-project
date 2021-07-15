@@ -2,7 +2,7 @@
 import arcade
 from game.jungle import Jungle
 from game import constants
-from game.instruction_window import InstructionView
+from game.Instruction_window import InstructionView
 
 def main():
     """ Main method """
