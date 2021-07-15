@@ -321,8 +321,6 @@ class Jungle(arcade.View):
 
 
         if self.lives == 0:
-            self.player_list.remove(self.player_sprite)
-        
             view = GameOverView()
             self.window.show_view(view)
 
